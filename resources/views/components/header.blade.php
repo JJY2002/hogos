@@ -21,6 +21,9 @@
                     <a class="nav-link" href="#">About</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="#">Menu</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="#">Services</a>
                 </li>
                 <li class="nav-item">
