@@ -6,11 +6,12 @@
     <title>House of Grill</title>
     @vite('resources/css/app.css')
     @vite('resources/js/app.js')
-    @section("scripts")
-        @parent
-    @show
 </head>
 <body>
     <x-header />
+    
+    <main>
+        {{ $slot }}
+    </main>
 </body>
 </html>
