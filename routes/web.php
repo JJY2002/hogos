@@ -17,3 +17,6 @@ Route::delete('/admin/menus/{menu}', [MenuController::class, 'destroy'])->name('
 
 // Customer menu view
 Route::get('/menu', [MenuController::class, 'customerView'])->name('customer.menu');
+
+//Order routes
+Route::get('/order/manage', function () { return view('order.manage');})->name('order.manage');
