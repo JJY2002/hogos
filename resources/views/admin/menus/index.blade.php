@@ -1,4 +1,4 @@
-<x-app-layout>
+<x-AppLayout>
     <div class="container mx-auto p-4">
         <h1 class="text-center text-2xl font-bold mb-6">Manage Menu Items</h1>
 
@@ -33,4 +33,4 @@
             @endforeach
         </div>
     </div>
-</x-app-layout>
+</x-AppLayout>
