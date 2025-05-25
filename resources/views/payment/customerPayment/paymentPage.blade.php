@@ -140,22 +140,47 @@
 
 
         <div class="flex-5 text-black">
+
+            <form action="/payment/customerPayment/paymentReceipt" method="GET" id="paymentForm">
           
                 <div class="bg-white p-[30px] font-[Inter] flex flex-col rounded-2xl text-black h-full">
 
-                            <h2 class="text-lg font-semibold mb-4">Select Payment Method</h2>
-                            <div class="grid grid-cols-3 gap-3 mb-4">
-                                <img src="/assets/images/mastercardlogo.png" alt="Mastercard" class="w-full h-26 object-contain border p-2 rounded-xl">
-                                <img src="/assets/images/tnglogo.png" alt="TouchNGo" class="w-full h-26 object-contain border-2 border p-2 rounded-xl">
-                                <img src="/assets/images/rhblogo.png" alt="RHB" class="w-full h-26 object-contain border p-2 rounded-xl">
+                            <p class="text-2xl font-semibold mb-3">Select Payment Method</p>
+                            <div class="grid grid-cols-3 gap-3 mb-4" id="paymentOptions">
 
-                                <img src="/assets/images/googlepaylogo.png" alt="GPay" class="w-full h-26 object-contain border p-2 rounded-xl">
-                                <img src="/assets/images/maybanklogo.png" alt="Maybank" class="w-full h-26 object-contain border p-2 rounded-xl">
-                                <img src="/assets/images/bankislamlogo.png" alt="Bank Islam" class="w-full h-26 object-contain border p-2 rounded-xl">
+                                <!--<div class="payment-option border p-2 rounded-xl cursor-pointer" data-method="mastercard">
+                                    <img src="/assets/images/mastercardlogo.png" alt="Mastercard" class="w-full h-26 object-contain border p-2 rounded-xl">
+                                </div>-->
 
-                                <img src="/assets/images/cimblogo.png" alt="CIMB" class="w-full h-26 object-contain border p-2 rounded-xl">
-                                <img src="/assets/images/hsbclogo.png" alt="HSBC" class="w-full h-26 object-contain border p-2 rounded-xl">
-                                <img src="/assets/images/paycounter.png" alt="Counter" class="w-full h-26 object-contain border p-2 rounded-xl">
+                                <div class="payment-option border p-2 rounded-xl cursor-pointer" data-method="mastercard">
+                                    <img src="/assets/images/mastercardlogo.png" alt="Mastercard" class="w-full h-[80px] object-contain">
+                                </div>
+                                <div class="payment-option border p-2 rounded-xl cursor-pointer" data-method="mastercard">
+                                    <img src="/assets/images/tnglogo.png" alt="TouchNGo" class="w-full h-[80px] object-contain">
+                                </div>
+                                <div class="payment-option border p-2 rounded-xl cursor-pointer" data-method="tng">
+                                    <img src="/assets/images/rhblogo.png" alt="RHB" class="w-full h-[80px] object-contain">
+                                </div>
+
+                                <div class="payment-option border p-2 rounded-xl cursor-pointer" data-method="rhb">
+                                    <img src="/assets/images/googlepaylogo.png" alt="GPay" class="w-full h-[80px] object-contain">
+                                </div>
+                                <div class="payment-option border p-2 rounded-xl cursor-pointer" data-method="gpay">
+                                    <img src="/assets/images/maybanklogo.png" alt="Maybank" class="w-full h-[80px] object-contain">
+                                </div>
+                                <div class="payment-option border p-2 rounded-xl cursor-pointer" data-method="maybank">
+                                    <img src="/assets/images/bankislamlogo.png" alt="Bank Islam" class="w-full h-[80px] object-contain">
+                                </div>
+
+                                <div class="payment-option border p-2 rounded-xl cursor-pointer" data-method="bankislam">
+                                    <img src="/assets/images/cimblogo.png" alt="CIMB" class="w-full h-[80px] object-contain">
+                                </div>
+                                <div class="payment-option border p-2 rounded-xl cursor-pointer" data-method="hsbc">
+                                    <img src="/assets/images/hsbclogo.png" alt="HSBC" class="w-full h-[80px] object-contain">
+                                </div>
+                                <div class="payment-option border p-2 rounded-xl cursor-pointer" data-method="counter">
+                                    <img src="/assets/images/paycounter.png" alt="Counter" class="w-full h-[80px] object-contain">
+                                </div>
                             </div>
 
                             <div class="mb-4">
@@ -163,10 +188,32 @@
                                 <input type="text" class="w-full border rounded-xl px-3 py-2" placeholder="Enter Voucher Code">
                             </div>
 
-                            <button class="w-full bg-[#6078D4] hover:bg-[#5569B4] text-white font-bold py-3 rounded-lg">PAY NOW</button>
+                            <input type="hidden" name="payment_method" id="selectedPaymentMethod">
+
+                            <button type="submit"
+                                class="w-full bg-[#6078D4] hover:bg-[#5569B4] text-white font-bold py-3 rounded-lg">
+                                PAY NOW
+                            </button>
                         
                 </div>
-        
+            </form>
+            <script>
+                const options = document.querySelectorAll('.payment-option');
+                const input = document.getElementById('selectedPaymentMethod');
+
+                options.forEach(option => {
+                    option.addEventListener('click', () => {
+                    // Remove selection from all
+                    options.forEach(opt => opt.classList.remove('border-blue-500', 'border-4'));
+
+                    // Add selection to clicked one
+                    option.classList.add('border-blue-500', 'border-4');
+
+                    // Store selected method
+                    input.value = option.dataset.method;
+                    });
+                });
+            </script>
         </div>
 
         
