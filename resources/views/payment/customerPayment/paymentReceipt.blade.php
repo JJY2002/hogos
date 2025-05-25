@@ -10,7 +10,7 @@
 
 <body style="background-color: #F0F0F0;" class="pb-1">
 
-<div class="bg-[#212328] w-full h-52 -mb-35 pl-20 pt-11">
+<div class="bg-[#212328] w-full h-52 -mt-3 -mb-35 pl-20 pt-11">
     <p class="text-white text-2xl font-[Inter] font-bold">Receipt</p>
 </div>
 

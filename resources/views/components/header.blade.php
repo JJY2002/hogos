@@ -1,7 +1,7 @@
-<nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark ">
+<nav class="navbar navbar-expand-lg h-[70px] navbar-dark fixed-top bg-dark ">
 
     <div class="container-fluid">
-        <a class="navbar-brand" href="#"><img src="{{ asset('assets/images/logo.png') }}" alt="Logo" width="80px"></a>
+        <a class="navbar-brand" href="#"><img src="{{ asset('assets/images/logo.png') }}" alt="Logo" width="65px"></a>
         <button
             class="navbar-toggler"
             type="button"

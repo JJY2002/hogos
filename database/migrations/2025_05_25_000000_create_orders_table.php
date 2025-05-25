@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id(); // Primary key, auto-increment (this is your orderId)
+            $table->integer('table');
             $table->date('date');
             $table->time('time');
             $table->string('name'); // Customer name

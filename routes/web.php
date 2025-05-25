@@ -29,7 +29,6 @@ Route::post('/admin/menus', [MenuController::class, 'store'])->name('admin.menus
 Route::get('/admin/menus/{menu}/edit', [MenuController::class, 'edit'])->name('admin.menus.edit');
 Route::put('/admin/menus/{menu}', [MenuController::class, 'update'])->name('admin.menus.update');
 Route::delete('/admin/menus/{menu}', [MenuController::class, 'destroy'])->name('admin.menus.destroy');
-
 Route::get('/admin/menus/create', [MenuController::class, 'create'])->name('admin.menus.create');
 
 
@@ -49,3 +48,6 @@ Route::get('/order/manage', function () { return view('order.manage');})->name('
 Route::get('/payment/customerPayment/paymentPage', [PaymentController::class, 'paymentIndex']);
 Route::get('/payment/customerPayment/paymentReceipt', [PaymentController::class, 'receiptIndex']);
 Route::get('/payment/customerPayment/orderStatus', [PaymentController::class, 'statusIndex']);
+Route::get('/payment/adminPayment/adminPaymentList', [PaymentController::class, 'paymentListIndex']);
+
+Route::get('/payment/adminPayment/adminPaymentList', [PaymentController::class, 'adminPaymentListIndex'])->name('adminPaymentListIndex');
