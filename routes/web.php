@@ -8,6 +8,12 @@ Route::get('/', function () {
     return view('index');
 });
 
+Route::get('/payment/customerPayment/paymentPage', function () {
+    return view('payment.customerPayment.paymentPage');
+});
+
+
+
 // Admin routes
 Route::get('/admin/menus', [MenuController::class, 'adminIndex'])->name('admin.menus.index');
 Route::get('/admin/menus/create', [MenuController::class, 'create'])->name('admin.menus.create');
@@ -18,7 +24,7 @@ Route::delete('/admin/menus/{menu}', [MenuController::class, 'destroy'])->name('
 
 Route::get('/admin/menus/create', [MenuController::class, 'create'])->name('admin.menus.create');
 
-Route::get('/payment/customerPayment/paymentPage', [MenuController::class, 'paymentIndex'])->name('payment.customerPayment.paymentPage');
+
 
 
 // Customer menu view
@@ -28,3 +34,7 @@ Route::get('/menu', [MenuController::class, 'customerMenu'])->name('menu.menu');
 //Order routes
 Route::get('/order/manage', function () { return view('order.manage');})->name('order.manage');
 // >>>>>>> 95457fd76005c1cc2a7e914a73750e3c84d817f6
+
+
+//Payment routes
+Route::get('/payment/customerPayment/paymentPage', [PaymentController::class, 'paymentIndex']);

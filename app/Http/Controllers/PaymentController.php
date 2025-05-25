@@ -10,6 +10,6 @@ class PaymentController extends Controller
     
 
     public function paymentIndex() {
-        return view('payment.customerPayment.paymentPage', compact('menus'));
+        return view('payment.customerPayment.paymentPage'/*, compact('menus')*/);
     }
 }
