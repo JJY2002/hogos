@@ -141,8 +141,30 @@
 
         <div class="flex-5 text-black">
           
-                <div class="bg-white p-[26px]  flex flex-col rounded-2xl text-black h-full">
-                    Box 3
+                <div class="bg-white p-[30px] font-[Inter] flex flex-col rounded-2xl text-black h-full">
+
+                            <h2 class="text-lg font-semibold mb-4">Select Payment Method</h2>
+                            <div class="grid grid-cols-3 gap-3 mb-4">
+                                <img src="/assets/images/mastercardlogo.png" alt="Mastercard" class="w-full h-26 object-contain border p-2 rounded-xl">
+                                <img src="/assets/images/tnglogo.png" alt="TouchNGo" class="w-full h-26 object-contain border-2 border p-2 rounded-xl">
+                                <img src="/assets/images/rhblogo.png" alt="RHB" class="w-full h-26 object-contain border p-2 rounded-xl">
+
+                                <img src="/assets/images/googlepaylogo.png" alt="GPay" class="w-full h-26 object-contain border p-2 rounded-xl">
+                                <img src="/assets/images/maybanklogo.png" alt="Maybank" class="w-full h-26 object-contain border p-2 rounded-xl">
+                                <img src="/assets/images/bankislamlogo.png" alt="Bank Islam" class="w-full h-26 object-contain border p-2 rounded-xl">
+
+                                <img src="/assets/images/cimblogo.png" alt="CIMB" class="w-full h-26 object-contain border p-2 rounded-xl">
+                                <img src="/assets/images/hsbclogo.png" alt="HSBC" class="w-full h-26 object-contain border p-2 rounded-xl">
+                                <img src="/assets/images/paycounter.png" alt="Counter" class="w-full h-26 object-contain border p-2 rounded-xl">
+                            </div>
+
+                            <div class="mb-4">
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Voucher Code</label>
+                                <input type="text" class="w-full border rounded-xl px-3 py-2" placeholder="Enter Voucher Code">
+                            </div>
+
+                            <button class="w-full bg-[#6078D4] hover:bg-[#5569B4] text-white font-bold py-3 rounded-lg">PAY NOW</button>
+                        
                 </div>
         
         </div>

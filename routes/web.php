@@ -8,9 +8,9 @@ Route::get('/', function () {
     return view('index');
 });
 
-Route::get('/payment/customerPayment/paymentPage', function () {
-    return view('payment.customerPayment.paymentPage');
-});
+//Route::get('/payment/customerPayment/paymentPage', function () {
+ //   return view('payment.customerPayment.paymentPage');
+//});
 
 Route::get('/payment/customerPayment/paymentReceipt', function () {
     return view('payment.customerPayment.paymentReceipt');
