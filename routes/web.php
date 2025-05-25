@@ -40,6 +40,7 @@ Route::get('/order/manage', function () { return view('order.manage');})->name('
 // >>>>>>> 95457fd76005c1cc2a7e914a73750e3c84d817f6
 
 
+
 //Payment routes
 Route::get('/payment/customerPayment/paymentPage', [PaymentController::class, 'paymentIndex']);
 Route::get('/payment/customerPayment/paymentReceipt', [PaymentController::class, 'receiptIndex']);
