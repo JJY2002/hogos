@@ -152,33 +152,33 @@
                                     <img src="/assets/images/mastercardlogo.png" alt="Mastercard" class="w-full h-26 object-contain border p-2 rounded-xl">
                                 </div>-->
 
-                                <div class="payment-option border p-2 rounded-xl cursor-pointer" data-method="mastercard">
+                                <div class="payment-option border p-2 rounded-xl cursor-pointer" data-method="Master Card">
                                     <img src="/assets/images/mastercardlogo.png" alt="Mastercard" class="w-full h-[80px] object-contain">
                                 </div>
-                                <div class="payment-option border p-2 rounded-xl cursor-pointer" data-method="mastercard">
+                                <div class="payment-option border p-2 rounded-xl cursor-pointer" data-method="TouchNGo eWallet">
                                     <img src="/assets/images/tnglogo.png" alt="TouchNGo" class="w-full h-[80px] object-contain">
                                 </div>
-                                <div class="payment-option border p-2 rounded-xl cursor-pointer" data-method="tng">
+                                <div class="payment-option border p-2 rounded-xl cursor-pointer" data-method="RHB Bank">
                                     <img src="/assets/images/rhblogo.png" alt="RHB" class="w-full h-[80px] object-contain">
                                 </div>
 
-                                <div class="payment-option border p-2 rounded-xl cursor-pointer" data-method="rhb">
+                                <div class="payment-option border p-2 rounded-xl cursor-pointer" data-method="Google Pay">
                                     <img src="/assets/images/googlepaylogo.png" alt="GPay" class="w-full h-[80px] object-contain">
                                 </div>
-                                <div class="payment-option border p-2 rounded-xl cursor-pointer" data-method="gpay">
+                                <div class="payment-option border p-2 rounded-xl cursor-pointer" data-method="Maybank Bank">
                                     <img src="/assets/images/maybanklogo.png" alt="Maybank" class="w-full h-[80px] object-contain">
                                 </div>
-                                <div class="payment-option border p-2 rounded-xl cursor-pointer" data-method="maybank">
+                                <div class="payment-option border p-2 rounded-xl cursor-pointer" data-method="Bank Islam">
                                     <img src="/assets/images/bankislamlogo.png" alt="Bank Islam" class="w-full h-[80px] object-contain">
                                 </div>
 
-                                <div class="payment-option border p-2 rounded-xl cursor-pointer" data-method="bankislam">
+                                <div class="payment-option border p-2 rounded-xl cursor-pointer" data-method="CIMB Bank">
                                     <img src="/assets/images/cimblogo.png" alt="CIMB" class="w-full h-[80px] object-contain">
                                 </div>
-                                <div class="payment-option border p-2 rounded-xl cursor-pointer" data-method="hsbc">
+                                <div class="payment-option border p-2 rounded-xl cursor-pointer" data-method="HSBC Bank">
                                     <img src="/assets/images/hsbclogo.png" alt="HSBC" class="w-full h-[80px] object-contain">
                                 </div>
-                                <div class="payment-option border p-2 rounded-xl cursor-pointer" data-method="counter">
+                                <div class="payment-option border p-2 rounded-xl cursor-pointer" data-method="Counter Payment">
                                     <img src="/assets/images/paycounter.png" alt="Counter" class="w-full h-[80px] object-contain">
                                 </div>
                             </div>
