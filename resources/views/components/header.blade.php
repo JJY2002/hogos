@@ -1,4 +1,5 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark ">
+
     <div class="container-fluid">
         <a class="navbar-brand" href="#"><img src="{{ asset('assets/images/logo.png') }}" alt="Logo" width="80px"></a>
         <button

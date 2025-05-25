@@ -17,6 +17,7 @@
     @show
 </head>
 <body>
+<div class="pt-[80px]"></div> <!--margin for the header so the page is not behind the header-->
     <x-header />
     
     <main>
