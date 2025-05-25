@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\OrderController;
 
 Route::get('/', function () {
     return view('index');
@@ -18,6 +19,9 @@ Route::get('/payment/customerPayment/paymentReceipt', function () {
 
 Route::get('/payment/customerPayment/paymentReceipt', function () {
     return view('payment.customerPayment.paymentReceipt');
+});
+Route::get('/order/cart', function () {
+    return view('order.cart');
 });
 
 
@@ -51,3 +55,8 @@ Route::get('/payment/customerPayment/orderStatus', [PaymentController::class, 's
 Route::get('/payment/adminPayment/adminPaymentList', [PaymentController::class, 'paymentListIndex']);
 
 Route::get('/payment/adminPayment/adminPaymentList', [PaymentController::class, 'adminPaymentListIndex'])->name('adminPaymentListIndex');
+Route::post('/order/store', [OrderController::class, 'storeOrder'])->name('order.store');
+Route::get('/orders/{id}', [OrderController::class, 'showOrder']);
+
+
+
