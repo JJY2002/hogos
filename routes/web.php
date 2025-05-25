@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MenuController;
+use App\Http\Controllers\PaymentController;
 
 Route::get('/', function () {
     return view('index');
@@ -17,6 +18,7 @@ Route::delete('/admin/menus/{menu}', [MenuController::class, 'destroy'])->name('
 
 Route::get('/admin/menus/create', [MenuController::class, 'create'])->name('admin.menus.create');
 
+Route::get('/payment/customerPayment/paymentPage', [MenuController::class, 'paymentIndex'])->name('payment.customerPayment.paymentPage');
 
 
 // Customer menu view
