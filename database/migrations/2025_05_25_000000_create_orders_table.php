@@ -11,10 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-
         Schema::create('orders', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+            $table->id(); // Primary key, auto-increment (this is your orderId)
+            $table->date('date');
+            $table->time('time');
+            $table->string('name'); // Customer name
+            $table->enum('orderType', ['Dine In', 'Takeaway']);
+            $table->enum('paymentStatus', ['Pending', 'Completed', 'Cancelled']);
+            $table->integer('itemQuantity');
+            $table->enum('orderStatus', ['Fulfilled', 'Unfulfilled']);
+            $table->decimal('totalPrice', 8, 2);
+            $table->timestamps(); // created_at and updated_at
         });
     }
 

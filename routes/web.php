@@ -16,6 +16,10 @@ Route::get('/payment/customerPayment/paymentReceipt', function () {
     return view('payment.customerPayment.paymentReceipt');
 });
 
+Route::get('/payment/customerPayment/paymentReceipt', function () {
+    return view('payment.customerPayment.paymentReceipt');
+});
+
 
 
 // Admin routes
@@ -44,3 +48,4 @@ Route::get('/order/manage', function () { return view('order.manage');})->name('
 //Payment routes
 Route::get('/payment/customerPayment/paymentPage', [PaymentController::class, 'paymentIndex']);
 Route::get('/payment/customerPayment/paymentReceipt', [PaymentController::class, 'receiptIndex']);
+Route::get('/payment/customerPayment/orderStatus', [PaymentController::class, 'statusIndex']);

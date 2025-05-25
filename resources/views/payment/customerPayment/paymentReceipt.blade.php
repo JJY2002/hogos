@@ -91,10 +91,10 @@
 
             <script>
                 function handleClick() {
-                    // Replace with your desired behavior
+                    const paymentMethod = "{{ request()->get('payment_method') }}";
+                    window.location.href = "/payment/customerPayment/orderStatus?payment_method=" + encodeURIComponent(paymentMethod);
                     alert("Continue button clicked!");
                     // Or navigate to another page:
-                    // window.location.href = "/next-page";
                 }
             </script>
 
