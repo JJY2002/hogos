@@ -21,8 +21,9 @@
                     <a class="nav-link" href="#">About</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Menu</a>
+                <a class="nav-link" href="{{ route('menu.menu') }}">Menu</a>
                 </li>
+
                 <li class="nav-item">
                     <a class="nav-link" href="#">Services</a>
                 </li>

@@ -1,4 +1,4 @@
-<x-app-layout>
+<x-AppLayout>
     <div class="container mx-auto p-4">
         <h1 class="text-2xl font-bold mb-4">Edit Menu Item</h1>
 
@@ -30,4 +30,4 @@
             <button type="submit" class="btn btn-primary">Update Menu Item</button>
         </form>
     </div>
-</x-app-layout>
+</x-AppLayout>
