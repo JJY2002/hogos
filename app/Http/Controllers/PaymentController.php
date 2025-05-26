@@ -13,39 +13,42 @@ class PaymentController extends Controller
     
     public function paymentIndex(Request $request)
     {
-        $tableNum = $request->query('tableNum'); // Get table number from URL
+        $tableNum = $request->input('tableNum');
 
-        if (!$tableNum) {
-            return redirect('/')->with('error', 'Table number is missing.');
+        // Get the order for the table number
+        $order = DB::table('ordered_items')->where('tableNum', $tableNum)->first();
+
+        if (!$order) {
+            return view('paymentPage', [
+                'orderedItems' => [],
+                'subtotal' => 0,
+                'serviceCharge' => 0,
+                'discount' => 0,
+                'total' => 0,
+                'tableNum' => $tableNum,
+                'message' => 'No active order found for this table'
+            ]);
         }
 
-        // Fetch ordered items using tableNum
+        // Join ordered_items -> order_items -> products to get details
         $orderedItems = DB::table('ordered_items')
-            ->where('tableNum', $tableNum)
-            ->get();
-
-        if ($orderedItems->isEmpty()) {
-            return redirect('/')->with('error', 'No orders found for this table.');
-        }
-
-        // Calculate subtotal
-        $subtotal = $orderedItems->sum(function ($item) {
-            return $item->price * $item->quantity;
-        });
-
+    ->join('order_items', 'ordered_items.id', '=', 'ordered_items.order_item_id')
+    ->select(
+        'ordered_items.*',
+        'order_items.price as item_price',
+        'order_items.menu_name',
+        'order_items.image'
+    )
+    ->where('ordered_items.tableNum', $tableNum)  // filter by tableNum on ordered_items
+    ->get();
+        // Calculate subtotal using quantity * item price
+        $subtotal = $orderedItems->sum(fn($item) => $item->quantity * $item->item_price);
         $serviceChargePercent = 6;
         $serviceCharge = ($serviceChargePercent / 100) * $subtotal;
-        $discount = 0;
+        $discount = 0; // modify if you have discounts
         $total = $subtotal + $serviceCharge - $discount;
 
-        return view('payment.customerPayment.paymentPage', [
-            'orderedItems' => $orderedItems,
-            'subtotal' => $subtotal,
-            'serviceCharge' => $serviceCharge,
-            'discount' => $discount,
-            'total' => $total,
-            'tableNum' => $tableNum,
-        ]);
+        return view('/payment/customerPayment/                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  paymentPage', compact('orderedItems', 'subtotal', 'serviceCharge', 'discount', 'total', 'tableNum'));
     }
 
 

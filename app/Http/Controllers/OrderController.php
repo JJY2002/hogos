@@ -13,33 +13,45 @@ class OrderController extends Controller
 {
 
 
-    public function showOrder($orderId)
+    public function testFunction(Request $request)
     {
-        // Fetch ordered items for the specific order
+        $tableNum = $request->input('tableNum');
+
+        // Get the order for the table number
+        $order = DB::table('orders')->where('table_num', $tableNum)->first();
+
+        if (!$order) {
+            return view('paymentPage', [
+                'orderedItems' => [],
+                'subtotal' => 0,
+                'serviceCharge' => 0,
+                'discount' => 0,
+                'total' => 0,
+                'tableNum' => $tableNum,
+                'message' => 'No active order found for this table'
+            ]);
+        }
+
+        // Join ordered_items -> order_items -> products to get details
         $orderedItems = DB::table('ordered_items')
-            ->where('order_item_id', $orderId)
+            ->join('order_items', 'ordered_items.ordered_item_id', '=', 'order_items.id')
+            ->select(
+                'ordered_items.*',
+                'order_items.quantity',
+                'order_items.price as item_price',
+                'order_items.menu_name',
+                'order_items.image'
+            )
+            ->where('order_items.order_id', $order->id)
             ->get();
-    
-        // Calculate subtotal
-        $subtotal = $orderedItems->sum(function ($item) {
-            return $item->price * $item->quantity;
-        });
-    
-        // Define charges
+        // Calculate subtotal using quantity * item price
+        $subtotal = $orderedItems->sum(fn($item) => $item->quantity * $item->item_price);
         $serviceChargePercent = 6;
         $serviceCharge = ($serviceChargePercent / 100) * $subtotal;
-        $discount = 0; // You can modify this if you apply voucher logic
+        $discount = 0; // modify if you have discounts
         $total = $subtotal + $serviceCharge - $discount;
-    
-        return view('orders.show', [
-            'orderId' => $orderId,
-            'orderedItems' => $orderedItems, // <--- this must match Blade variable
-            'subtotal' => $subtotal,
-            'serviceChargePercent' => $serviceChargePercent,
-            'serviceCharge' => $serviceCharge,
-            'discount' => $discount,
-            'total' => $total,
-        ]);
+
+        return view('paymentPage', compact('orderedItems', 'subtotal', 'serviceCharge', 'discount', 'total', 'tableNum'));
     }
 
 

@@ -17,7 +17,7 @@ class Order extends Model
     }
 
     protected $fillable = [
-        'table',        // add this line
+        'table',
         'date',
         'time',
         'name',

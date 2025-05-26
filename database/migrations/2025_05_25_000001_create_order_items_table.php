@@ -14,7 +14,6 @@ class CreateOrderItemsTable extends Migration
         Schema::create('order_items', function (Blueprint $table) {
             $table->id(); // This creates an UNSIGNED BIGINT which is compatible with foreign keys
             $table->string('menu_name');
-            $table->integer('quantity');
             $table->decimal('price', 8, 2);
             $table->string('image')->nullable();
             $table->timestamps();

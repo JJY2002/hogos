@@ -49,17 +49,16 @@
                         </tbody>
                     </table>
                 </div>-->
-
                 <div class="overflow-y-auto" style="max-height: 40vh;">
                 <table class="w-full table-auto font-[Inter] font-semibold text-left text-sm">
                     <tbody class="space-y-2">
                         @foreach($orderedItems as $item)
                         <tr class="border-b">
                             <td class="py-2">
-                                <img src="{{ asset($item->image) }}" class="w-12 h-12 rounded" alt="item image">
+                                <img src="{{ asset($item->image) }}" class="w-12 h-12 rounded" alt="product image">
                             </td>
-                            <td class="py-2">{{ $item->quantity }}x {{ ucfirst(pathinfo($item->image, PATHINFO_FILENAME)) }}</td>
-                            <td class="py-2 text-right">RM {{ number_format($item->price * $item->quantity, 2) }}</td>
+                            <td class="py-2">{{ $item->quantity }}x {{ $item->menu_name }}</td>
+                            <td class="py-2 text-right">RM {{ number_format($item->quantity * $item->item_price, 2) }}</td>
                         </tr>
                         @endforeach
                     </tbody>
