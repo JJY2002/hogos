@@ -34,7 +34,6 @@ class MenuController extends Controller
         'name' => 'required',
         'description' => 'required',
         'price' => 'required|numeric',
-        'category' => 'required',
         'image' => 'required|image|mimes:jpeg,png,jpg|max:5120',
     ]);
 
@@ -46,7 +45,6 @@ class MenuController extends Controller
         'name' => $request->name,
         'description' => $request->description,
         'price' => $request->price,
-        'category' => $request->category,
         'image' => 'storage/' . $imagePath, // Stored as storage/assets/images/filename.jpg
     ]);
 

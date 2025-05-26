@@ -1,4 +1,4 @@
-<x-AppLayout>
+<x-app-layout>
     <div class="container">
         <h1 class="text-center mb-4">Edit Menu Item</h1>
 
@@ -41,5 +41,5 @@
             <button type="submit" class="btn btn-success">Update Menu Item</button>
         </form>
     </div>
-</x-AppLayout>
+</x-app-layout>
 

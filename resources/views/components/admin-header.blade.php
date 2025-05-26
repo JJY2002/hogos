@@ -15,19 +15,15 @@
 
         <!-- Navigation Links -->
         <div id="navbar-menu" class="hidden md:flex md:items-center md:space-x-6">
-            <a href="#" class="text-white hover:text-gray-300 font-medium text-decoration-none bg-gray-600 px-3 py-2 rounded-2xl me-100">Table No: {{ session('table_no') }}</a>
             <a href="/" class="text-white hover:text-gray-300 font-medium text-decoration-none">Home</a>
-            <a href="{{ route('menu.menu') }}" class="text-white hover:text-gray-300 font-medium text-decoration-none">Menu</a>
-            <a href="#" class="text-white hover:text-gray-300 font-medium text-decoration-none bg-gray-600 hover:bg-gray-800 px-3 py-2 rounded-2xl">Admin Login</a>
-            <a href="{{ route('order.cart') }}" class="text-white hover:text-gray-300 font-medium text-decoration-none"><i class="bi bi-basket2-fill"></i></a>
+            <a href="{{ route('admin.menus.index') }}" class="text-white hover:text-gray-300 font-medium text-decoration-none">Menu</a>
         </div>
     </div>
 
     <!-- Mobile Menu -->
     <div id="mobile-menu" class="md:hidden hidden px-4 pb-4 space-y-2 bg-gray-900">
         <a href="/" class="block text-white hover:text-gray-300 font-medium text-decoration-none">Home</a>
-        <a href="{{ route('menu.menu') }}" class="block text-white hover:text-gray-300 font-medium text-decoration-none">Menu</a>
-        <a href="#" class="block text-white hover:text-gray-300 font-medium text-decoration-none bg-gray-600 hover:bg-gray-800 px-3 py-2 rounded-2xl">Admin Login</a>
+        <a href="{{ route('admin.menus.index') }}" class="block text-white hover:text-gray-300 font-medium text-decoration-none">Menu</a>
     </div>
 </nav>
 

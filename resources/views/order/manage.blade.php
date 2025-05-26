@@ -1,4 +1,4 @@
-<x-AppLayout>
+<x-app-layout>
 <table class="table table-striped table-hover">
     <tr>
         <th>Order Id</th>
@@ -12,4 +12,4 @@
         <td colspan="6">No data found!</td>
     </tr>
 </table>
-</x-AppLayout>
+</x-app-layout>

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\RegistrationController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\PaymentController;
@@ -8,6 +9,23 @@ use App\Http\Controllers\OrderController;
 Route::get('/', function () {
     return view('index');
 });
+Route::get('/reset', function () {
+    session()->forget('table_no');
+    return redirect('/');
+})->name('reset');
+Route::get('/admin-login', function (\Illuminate\Http\Request $request) {
+    $inputPassword = $request->query('password');
+    $correctPassword = 'asdqwe123'; // Hardcoded password
+
+    if ($inputPassword === $correctPassword) {
+        session(['admin' => true]);
+        return redirect('/order/manage');
+    } else {
+        return redirect()->back()->with('error', 'Incorrect admin password');
+    }
+});
+
+Route::post('/set-table', [OrderController::class, 'initTableNo'])->name('table.set');
 
 //Route::get('/payment/customerPayment/paymentPage', function () {
  //   return view('payment.customerPayment.paymentPage');
@@ -45,12 +63,17 @@ Route::get('/menu', [MenuController::class, 'customerMenu'])->name('menu.menu');
 
 //Order routes
 Route::get('/order/manage', function () { return view('order.manage');})->name('order.manage');
+Route::post('order/storeItem', [OrderController::class, 'storeOrderItem'])->name('order.storeItem');
+Route::get('/order/cart', [OrderController::class, 'toCart'])->name('order.cart');
+Route::post('/order/update-quantity', [OrderController::class, 'changeQuantity'])->name('order.updateQuantity');
+Route::post('/order/update-order', [OrderController::class, 'updateOrder'])->name('order.updateOrder');
+Route::get('/order/get-item-quantity/{menuId}', [OrderController::class, 'getItemQuantity'])->name('order.getItemQuantity');
 // >>>>>>> 95457fd76005c1cc2a7e914a73750e3c84d817f6
 
 
 
 //Payment routes
-Route::get('/payment/customerPayment/paymentPage', [PaymentController::class, 'paymentIndex']);
+Route::get('/payment/customerPayment/paymentPage', [PaymentController::class, 'paymentIndex'])->name('paymentPage');
 Route::get('/payment/customerPayment/paymentReceipt', [PaymentController::class, 'receiptIndex']);
 Route::get('/payment/customerPayment/orderStatus', [PaymentController::class, 'statusIndex']);
 Route::get('/payment/adminPayment/adminPaymentList', [PaymentController::class, 'paymentListIndex']);

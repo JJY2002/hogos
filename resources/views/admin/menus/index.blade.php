@@ -1,4 +1,4 @@
-<x-AppLayout>
+<x-app-layout>
     <div class="container py-4">
         <h1 class="text-center mb-4">Manage Menu Items</h1>
 
@@ -42,5 +42,5 @@
             </div>
         @endif
     </div>
-</x-AppLayout>
+</x-app-layout>
 
