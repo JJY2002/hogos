@@ -1,6 +1,11 @@
 <x-AppLayout>
     <div class="container">
         <h1 class="text-center mb-4">Our Signatures</h1>
+
+        @if($menus->isEmpty())
+            <p class="text-center text-muted">No menu items found.</p>
+        @endif
+
         <div class="row">
             @foreach($menus as $menu)
                 <div class="col-md-4">
@@ -17,4 +22,5 @@
         </div>
     </div>
 </x-AppLayout>
+
 

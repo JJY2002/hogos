@@ -1,6 +1,12 @@
 <x-AppLayout>
-    <div class="container mx-auto p-4">
-        <h1 class="text-2xl font-bold mb-4">Edit Menu Item</h1>
+    <div class="container">
+        <h1 class="text-center mb-4">Edit Menu Item</h1>
+
+        @if (session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
 
         <form action="{{ route('admin.menus.update', $menu->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
@@ -22,12 +28,18 @@
             </div>
 
             <div class="mb-3">
-                <label for="image" class="form-label">Dish Image</label>
-                <input type="file" class="form-control" id="image" name="image">
-                <img src="{{ asset('storage/' . $menu->image) }}" alt="Current Image" class="img-thumbnail mt-2" width="150">
+                <label for="category" class="form-label">Category</label>
+                <input type="text" class="form-control" id="category" name="category" value="{{ $menu->category }}" required>
             </div>
 
-            <button type="submit" class="btn btn-primary">Update Menu Item</button>
+            <div class="mb-3">
+                <label for="image" class="form-label">Dish Image</label>
+                <input type="file" class="form-control" id="image" name="image">
+                <img src="{{ asset($menu->image) }}" alt="Current Image" class="img-thumbnail mt-2" width="150">
+            </div>
+
+            <button type="submit" class="btn btn-success">Update Menu Item</button>
         </form>
     </div>
 </x-AppLayout>
+
