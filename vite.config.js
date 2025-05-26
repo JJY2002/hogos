@@ -11,3 +11,18 @@ export default defineConfig({
         tailwindcss(),
     ],
 });
+
+module.exports = {
+    theme: {
+        extend: {
+            fontFamily: {
+                helveticaNeue: [
+                    '"Helvetica Neue LT Std"',
+                    "Helvetica",
+                    "Arial",
+                    "sans-serif",
+                ],
+            },
+        },
+    },
+};
