@@ -22,7 +22,7 @@
                     <a class="nav-link" href="#">About</a>
                 </li>
                 <li class="nav-item">
-                <a class="nav-link" href="{{ route('admin.menus.index') }}">Menu</a>
+                <a class="nav-link" href="{{ route('menu.menu') }}">Menu</a>
                 </li>
 
                 <li class="nav-item">
