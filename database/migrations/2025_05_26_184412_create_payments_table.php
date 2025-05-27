@@ -13,7 +13,7 @@ class CreatePaymentsTable extends Migration
             $table->id();
 
             // Foreign key to ordered_items table
-            $table->foreignId('ordered_id')->constrained('ordered_items')->onDelete('cascade');
+            $table->foreignId('order_id')->constrained('orders')->onDelete('cascade');
 
             // Enumerations for order type and status
             $table->string('name');

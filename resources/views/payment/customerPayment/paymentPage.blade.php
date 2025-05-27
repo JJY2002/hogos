@@ -1,10 +1,10 @@
-<x-AppLayout>
+<x-app-layout>
 
 <style>
         p {
-            margin-top: 0;   
-            margin-bottom: 0; 
-            padding: 0;         
+            margin-top: 0;
+            margin-bottom: 0;
+            padding: 0;
         }
 </style>
 
@@ -21,7 +21,7 @@
         <div class="flex-5 text-black  flex flex-col overflow-hidden  ">
 
             <div class="bg-white p-[20px] flex-5 rounded-2xl flex flex-col mb-3 text-black">
-                <!--BOX 1 Content-->    
+                <!--BOX 1 Content-->
                 <div class="flex items-center justify-between">
                     <p class="text-2xl font-[Inter] font-semibold">Table No #{{ $tableNum }}</p>
                     <p class="text-xl font-[Inter] font-semibold text-black">Dine In</p>
@@ -72,7 +72,7 @@
             </div>
 
 
-            
+
             <div class="bg-white p-[20px] flex-4  rounded-xl">
 
                 <div class="text-sm font-medium font-[Inter] text-gray-600 flex justify-between pr-3.5">
@@ -96,14 +96,14 @@
             </div>
         </div>
 
-        
-            
+
+
 
 
         <div class="flex-5 text-black">
 
             <form action="/payment/customerPayment/paymentReceipt" method="GET" id="paymentForm">
-          
+
                 <div class="bg-white p-[30px] font-[Inter] flex flex-col rounded-2xl text-black h-full">
 
                             <p class="text-2xl font-semibold mb-3">Select Payment Method</p>
@@ -155,7 +155,7 @@
                                 class="w-full bg-[#6078D4] hover:bg-[#5569B4] text-white font-bold py-3 rounded-lg">
                                 PAY NOW
                             </button>
-                        
+
                 </div>
             </form>
             <script>
@@ -177,11 +177,11 @@
             </script>
         </div>
 
-        
-        
+
+
 
 
     </div>
 
 </body>
-</x-AppLayout>
+</x-app-layout>

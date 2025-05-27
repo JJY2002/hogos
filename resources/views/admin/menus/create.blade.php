@@ -1,6 +1,29 @@
+<<<<<<< HEAD
 <x-AppLayout>
     <div class="container py-5">
         <h2 class="mb-4 fw-bold">Add New Menu Item</h2>
+=======
+    <div class="container mx-auto p-4">
+        <h1 class="text-2xl font-bold mb-4">Add New Menu Item</h1>
+
+        @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
+@if (session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
+        <form action="{{ route('admin.menus.store') }}" method="POST" enctype="multipart/form-data">
+        @csrf
+
 
         <form action="{{ route('admin.menus.store') }}" method="POST" enctype="multipart/form-data" class="p-4 border rounded-4 shadow-sm bg-light">
             @csrf

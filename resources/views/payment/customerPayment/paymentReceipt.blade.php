@@ -1,4 +1,4 @@
-<x-AppLayout>
+<x-app-layout>
 
 <style>
         p {
@@ -18,7 +18,7 @@
 
 
             <div class="bg-white w-[450px] mx-auto p-[20px] flex-5 rounded-2xl flex flex-col mb-3 text-black border-2 border-gray-300">
-                <!--BOX  Content-->    
+                <!--BOX  Content-->
                 <img src="/assets/images/greentick.png" alt="Done" class="w-full h-[30px] my-2 object-contain">
                 <div class="flex justify-center">
                     <p class="text-2xl font-[inter]  font-bold">Payment Successful</p>
@@ -30,8 +30,8 @@
                 </div>
 
                 <div class="bg-gray-300 h-[2px] -ml-5 my-3.5 w-[447px]"></div>
-                
-                
+
+
                 <!--<div class="flex items-center justify-between">-->
 
                 <div class="overflow-y-auto" style="max-height: 40vh;">
@@ -99,7 +99,7 @@
             </script>
 
 
-            
+
 
 
 
@@ -108,17 +108,17 @@
             </div>
 
 
-        
-            
 
 
 
 
-        
-        
+
+
+
+
 
 
 
 
 </body>
-</x-AppLayout>
+</x-app-layout>

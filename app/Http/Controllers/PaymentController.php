@@ -10,16 +10,19 @@ use Illuminate\Support\Facades\DB;
 
 class PaymentController extends Controller
 {
-    
+
     public function paymentIndex(Request $request)
     {
         $tableNum = $request->input('tableNum');
 
-        // Get the order for the table number
-        $order = DB::table('ordered_items')->where('tableNum', $tableNum)->first();
+        // Get the active order for the table
+        $order = \App\Models\Order::with(['items.menu']) // Eager load menus through order_menus
+        ->where('table_no', $tableNum)
+            ->where('order_status', 'confirmed') // or 'ordering' if still active
+            ->first();
 
         if (!$order) {
-            return view('paymentPage', [
+            return view('payment.customerPayment.paymentPage', [
                 'orderedItems' => [],
                 'subtotal' => 0,
                 'serviceCharge' => 0,
@@ -30,25 +33,27 @@ class PaymentController extends Controller
             ]);
         }
 
-        // Join ordered_items -> order_items -> products to get details
-        $orderedItems = DB::table('ordered_items')
-    ->join('order_items', 'ordered_items.id', '=', 'ordered_items.order_item_id')
-    ->select(
-        'ordered_items.*',
-        'order_items.price as item_price',
-        'order_items.menu_name',
-        'order_items.image'
-    )
-    ->where('ordered_items.tableNum', $tableNum)  // filter by tableNum on ordered_items
-    ->get();
-        // Calculate subtotal using quantity * item price
-        $subtotal = $orderedItems->sum(fn($item) => $item->quantity * $item->item_price);
+        // Transform order_menus with menu info
+        $orderedItems = $order->items->map(function ($item) {
+            return (object) [
+                'menu_name' => $item->menu->name,
+                'image' => $item->menu->image,
+                'item_price' => $item->menu->price,
+                'quantity' => $item->quantity,
+                'subtotal' => $item->quantity * $item->menu->price
+            ];
+        });
+
+        // Calculate totals
+        $subtotal = $orderedItems->sum(fn($item) => $item->subtotal);
         $serviceChargePercent = 6;
-        $serviceCharge = ($serviceChargePercent / 100) * $subtotal;
-        $discount = 0; // modify if you have discounts
+        $serviceCharge = round(($serviceChargePercent / 100) * $subtotal, 2);
+        $discount = 0;
         $total = $subtotal + $serviceCharge - $discount;
 
-        return view('/payment/customerPayment/                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  paymentPage', compact('orderedItems', 'subtotal', 'serviceCharge', 'discount', 'total', 'tableNum'));
+        return view('payment.customerPayment.paymentPage', compact(
+            'orderedItems', 'subtotal', 'serviceCharge', 'discount', 'total', 'tableNum'
+        ));
     }
 
 

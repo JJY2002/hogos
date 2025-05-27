@@ -1,18 +1,18 @@
-<nav class="navbar navbar-expand-lg h-[70px] navbar-dark fixed-top bg-dark ">
+<nav class="w-full bg-black text-white z-50">
+    <div class="max-w-screen-xl mx-auto px-4 py-2 flex items-center justify-between">
+        <!-- Logo -->
+        <a href="/" class="flex-shrink-0">
+            <img src="{{ asset('assets/images/logo.png') }}" alt="Logo" class="h-20 w-auto">
+        </a>
 
-    <div class="container-fluid">
-        <a class="navbar-brand" href="#"><img src="{{ asset('assets/images/logo.png') }}" alt="Logo" width="65px"></a>
-        <button
-            class="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarNav"
-            aria-controls="navbarNav"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-        >
-            <span class="navbar-toggler-icon"></span>
+        <!-- Hamburger Menu (mobile) -->
+        <button id="navbar-toggle" class="md:hidden text-white focus:outline-none">
+            <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2"
+                 viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 6h16M4 12h16M4 18h16"/>
+            </svg>
         </button>
+<<<<<<< HEAD
         <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
@@ -24,14 +24,33 @@
                 <li class="nav-item">
                 <a class="nav-link" href="{{ route('menu.menu') }}">Menu</a>
                 </li>
+=======
+>>>>>>> bc921ed77f3358af29f06c7447b34f100b9558fb
 
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Services</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Contact</a>
-                </li>
-            </ul>
+        <!-- Navigation Links -->
+        <div id="navbar-menu" class="hidden md:flex md:items-center md:space-x-6">
+            <a href="#" class="text-white hover:text-gray-300 font-medium text-decoration-none bg-gray-600 px-3 py-2 rounded-2xl me-100">Table No: {{ session('table_no') }}</a>
+            <a href="/" class="text-white hover:text-gray-300 font-medium text-decoration-none">Home</a>
+            <a href="{{ route('menu.menu') }}" class="text-white hover:text-gray-300 font-medium text-decoration-none">Menu</a>
+            <a href="#" class="text-white hover:text-gray-300 font-medium text-decoration-none bg-gray-600 hover:bg-gray-800 px-3 py-2 rounded-2xl">Admin Login</a>
+            <a href="{{ route('order.cart') }}" class="text-white hover:text-gray-300 font-medium text-decoration-none"><i class="bi bi-basket2-fill"></i></a>
         </div>
     </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="md:hidden hidden px-4 pb-4 space-y-2 bg-gray-900">
+        <a href="/" class="block text-white hover:text-gray-300 font-medium text-decoration-none">Home</a>
+        <a href="{{ route('menu.menu') }}" class="block text-white hover:text-gray-300 font-medium text-decoration-none">Menu</a>
+        <a href="#" class="block text-white hover:text-gray-300 font-medium text-decoration-none bg-gray-600 hover:bg-gray-800 px-3 py-2 rounded-2xl">Admin Login</a>
+    </div>
 </nav>
+
+<script>
+    const toggleBtn = document.getElementById('navbar-toggle');
+    const menu = document.getElementById('navbar-menu');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    toggleBtn.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+    });
+</script>
