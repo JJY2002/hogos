@@ -1,14 +1,15 @@
-<x-app-layout>
+<<<<<<< HEAD
+<x-AppLayout>
+       <div style="background-color: #f4f4f4; min-height: 100vh;">
+    <div class="container py-5">
+        <h2 class="mb-4 fw-bold">Edit Menu Item</h2>
+=======
+
     <div class="container">
         <h1 class="text-center mb-4">Edit Menu Item</h1>
 
-        @if (session('success'))
-            <div class="alert alert-success">
-                {{ session('success') }}
-            </div>
-        @endif
 
-        <form action="{{ route('admin.menus.update', $menu->id) }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('admin.menus.update', $menu->id) }}" method="POST" enctype="multipart/form-data" class="p-4 border rounded-4 shadow-sm bg-light">
             @csrf
             @method('PUT')
 
@@ -23,7 +24,7 @@
             </div>
 
             <div class="mb-3">
-                <label for="price" class="form-label">Price</label>
+                <label for="price" class="form-label">Price (RM)</label>
                 <input type="number" step="0.01" class="form-control" id="price" name="price" value="{{ $menu->price }}" required>
             </div>
 
@@ -32,14 +33,16 @@
                 <input type="text" class="form-control" id="category" name="category" value="{{ $menu->category }}" required>
             </div>
 
-            <div class="mb-3">
-                <label for="image" class="form-label">Dish Image</label>
+            <div class="mb-4">
+                <label for="image" class="form-label">Upload New Image (optional)</label>
                 <input type="file" class="form-control" id="image" name="image">
-                <img src="{{ asset($menu->image) }}" alt="Current Image" class="img-thumbnail mt-2" width="150">
+                <small class="text-muted">Leave blank to keep existing image.</small>
             </div>
 
-            <button type="submit" class="btn btn-success">Update Menu Item</button>
+            <button type="submit" class="btn btn-success">Update Item</button>
         </form>
     </div>
-</x-app-layout>
+<<<<<<< HEAD
+</x-AppLayout>
+=======
 

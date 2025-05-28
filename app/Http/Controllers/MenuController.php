@@ -37,9 +37,13 @@ class MenuController extends Controller
         'image' => 'required|image|mimes:jpeg,png,jpg|max:5120',
     ]);
 
-    // Store the uploaded image in storage/app/public/assets/images
-    $imagePath = $request->file('image')->store('assets/images', 'public');
-
+    if ($request->hasFile('image')) {
+        $imagePath = $request->file('image')->store('assets/images', 'public');
+        $image = 'storage/' . $imagePath;
+    } else {
+        $image = null;
+    }
+    
     // Create menu item in DB
     Menu::create([
         'name' => $request->name,

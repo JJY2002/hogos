@@ -12,6 +12,20 @@
                 <path d="M4 6h16M4 12h16M4 18h16"/>
             </svg>
         </button>
+<<<<<<< HEAD
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">About</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link" href="{{ route('menu.menu') }}">Menu</a>
+                </li>
+=======
+>>>>>>> bc921ed77f3358af29f06c7447b34f100b9558fb
 
         <!-- Navigation Links -->
         <div id="navbar-menu" class="hidden md:flex md:items-center md:space-x-6">
