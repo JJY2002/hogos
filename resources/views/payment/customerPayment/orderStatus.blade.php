@@ -40,7 +40,7 @@
             <tbody class="space-y-2">
                 <tr class="border-b">
                     <td class="py-2 px-2 text-gray-500">Order Number</td>
-                    <td class="py-2 px-2 text-right">#B0001</td>
+                    <td class="py-2 px-2 text-right">#{{ session('order_id') }}</td>
                 </tr>
                 <tr class="border-b">
                     <td class="py-2 px-2 text-gray-500">Estimated Time</td>

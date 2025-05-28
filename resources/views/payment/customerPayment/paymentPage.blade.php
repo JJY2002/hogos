@@ -23,10 +23,10 @@
             <div class="bg-white p-[20px] flex-5 rounded-2xl flex flex-col mb-3 text-black">
                 <!--BOX 1 Content-->
                 <div class="flex items-center justify-between">
-                    <p class="text-2xl font-[Inter] font-semibold">Table No #{{ $tableNum }}</p>
+                    <p class="text-2xl font-[Inter] font-semibold">Table No #{{ session('table_no') }}</p>
                     <p class="text-xl font-[Inter] font-semibold text-black">Dine In</p>
                 </div>
-                <p style="color: #838383;" class="text-sm font-[Inter] font-semibold mb-3">Order #B000</p>
+                <p style="color: #838383;" class="text-sm font-[Inter] font-semibold mb-3">Order #{{ session('order_id') }}</p>
 
 
                 <!--<div class="overflow-y-auto" style="max-height: 40vh;">

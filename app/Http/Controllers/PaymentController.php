@@ -14,12 +14,10 @@ class PaymentController extends Controller
     public function paymentIndex(Request $request)
     {
         $tableNum = $request->input('tableNum');
-
+        $order_id = session('order_id');
         // Get the active order for the table
         $order = \App\Models\Order::with(['items.menu']) // Eager load menus through order_menus
-        ->where('table_no', $tableNum)
-            ->where('order_status', 'confirmed') // or 'ordering' if still active
-            ->first();
+        ->find($order_id);
 
         if (!$order) {
             return view('payment.customerPayment.paymentPage', [

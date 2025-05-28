@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Menu;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\OrderMenu;
@@ -12,6 +13,29 @@ use Illuminate\Support\Facades\DB;
 
 class OrderController extends Controller
 {
+    public function index(Request $request) {
+        $admin = session('admin');
+
+        if (!$admin) {
+            return redirect('/');
+        }
+
+        $orders = Order::where('order_status', 'confirmed')
+            ->orderBy('updated_at', 'asc') // Use orderBy, not sortBy
+            ->with('items.menu') // Eager load to prevent N+1
+            ->get();
+        return view('order.index')->with('orders', $orders);
+    }
+
+    public function orderGrid()
+    {
+        $orders = Order::where('order_status', 'confirmed')
+            ->orderBy('updated_at', 'asc') // Use orderBy, not sortBy
+            ->with('items.menu') // Eager load to prevent N+1
+            ->get();
+        return view('partial.order-grid', compact('orders'));
+    }
+
     public function initTableNo(Request $request)
     {
         if (session()->has('table_no')) {
@@ -23,21 +47,21 @@ class OrderController extends Controller
         ]);
 
         session(['table_no' => $request->table_no]);
-        Order::create([
+        $order = Order::create([
             'table_no' => $request->table_no,
             'order_status' => 'Pending'
         ]);
 
+        session(['order_id' => $order->id]);
+        session()->forget('admin');
         return redirect()->route('menu.menu');
     }
 
     public function getItemQuantity($menuId)
     {
         $tableNo = session('table_no'); // Or get the current user's table number somehow
-
-        $order = Order::where('table_no', $tableNo)
-            ->where('order_status', 'Pending')
-            ->first();
+        $order_id = session('order_id');
+        $order = Order::find($order_id);
 
         if (!$order) {
             return response()->json(['quantity' => 0]);
@@ -58,15 +82,13 @@ class OrderController extends Controller
         ]);
 
         $table_no = session('table_no');
+        $order_id = session('order_id');
 
         if (!$table_no) {
             return redirect()->back()->with('error', 'Table number not found in session.');
         }
 
-        $order = DB::table('orders')
-            ->where('table_no', $table_no)
-            ->where('order_status', 'Pending')
-            ->first();
+        $order = Order::find($order_id);
 
         if (!$order) {
             return response()->json(['success' => false, 'message' => 'No active pending order found']);
@@ -96,26 +118,28 @@ class OrderController extends Controller
 
     public function toCart(Request $request) {
         $table_no = session('table_no');
+        $order_id = session('order_id');
 
-        $order = DB::table('orders')
-            /*->where('table_no', $table_no)*/
-            ->where('order_status', 'Pending')
-            ->first();
-        $order = Order::with(['items.menu']) // eager load both items and each item's menu
-        ->where('order_status', 'Pending')
-            ->first();
+        // Ensure table number is available
+        if (!$table_no) {
+            return redirect()->back()->with('error', 'Table number not found in session.');
+        }
 
-        return view('order.cart')->with('order', $order);
+        // Retrieve the pending order for this table with related items and their menu
+        $order = Order::with(['items.menu']) // eager load order_menus and menus
+        ->find($order_id);
+
+        return view('order.cart', compact('order'));
     }
+
 
     public function changeQuantity(Request $request) {
         $request->validate([
-            'order_menu_id' => 'required|exists:menus,id',
+            'order_menu_id' => 'required|exists:order_menus,id',
             'quantity' => 'required|integer|min:1'
         ]);
 
-        $orderMenu = OrderMenu::where('id', $request->order_menu_id)
-            ->first();
+        $orderMenu = OrderMenu::find($request->order_menu_id);
         $orderMenu->quantity = $request->quantity;
         $orderMenu->save();
 
@@ -140,46 +164,77 @@ class OrderController extends Controller
             ->with('success', 'Order confirmed!');
     }
 
-    public function testFunction(Request $request)
+    public function manageOrder(Request $request)
     {
-        $tableNum = $request->input('tableNum');
+        $admin = session('admin');
 
-        // Get the order for the table number
-        $order = DB::table('orders')->where('table_num', $tableNum)->first();
+        if (!$admin) {
+            return redirect('/');
+        }
 
-        if (!$order) {
-            return view('paymentPage', [
-                'orderedItems' => [],
-                'subtotal' => 0,
-                'serviceCharge' => 0,
-                'discount' => 0,
-                'total' => 0,
-                'tableNum' => $tableNum,
-                'message' => 'No active order found for this table'
+        $orders = Order::all()->sortByDesc('id');
+        return view('order.manage')->with('orders', $orders);
+    }
+
+    public function edit($id)
+    {
+        $order = Order::with(['items.menu'])->findOrFail($id);
+        $menus = Menu::all(); // for dropdown or adding new items
+        return view('order.edit', compact('order', 'menus'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'table_no' => 'required|integer|min:1|max:99',
+            'order_status' => 'required|string',
+            'items' => 'required|array',
+            'items.*.id' => 'required|exists:order_menus,id',
+            'items.*.quantity' => 'required|integer|min:1',
+        ]);
+
+        foreach ($request->items as $item) {
+            $orderMenu = OrderMenu::find($item['id']);
+            $orderMenu->quantity = $item['quantity'];
+            $orderMenu->save();
+        }
+
+        $order = Order::find($id);
+        $order->order_status = $request->order_status;
+        $order->table_no = $request->table_no;
+        $order->save();
+
+        return redirect()->route('order.edit', $id)->with('success', 'Order updated successfully.');
+    }
+
+    public function create()
+    {
+        $menus = Menu::all();
+        return view('order.create', compact('menus'));
+    }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'table_no' => 'required|integer|min:1',
+            'order_status' => 'required|in:Pending,Completed,Canceled',
+            'items_json' => 'required|json',
+        ]);
+
+        $order = Order::create([
+            'table_no' => $request->table_no,
+            'order_status' => $request->order_status,
+        ]);
+
+        $items = json_decode($request->items_json, true);
+        foreach ($items as $item) {
+            OrderMenu::create([
+                'order_id' => $order->id,
+                'menu_id' => $item['id'],
+                'quantity' => $item['quantity'],
             ]);
         }
 
-        // Join ordered_items -> order_items -> products to get details
-        $orderedItems = DB::table('ordered_items')
-            ->join('order_items', 'ordered_items.ordered_item_id', '=', 'order_items.id')
-            ->select(
-                'ordered_items.*',
-                'order_items.quantity',
-                'order_items.price as item_price',
-                'order_items.menu_name',
-                'order_items.image'
-            )
-            ->where('order_items.order_id', $order->id)
-            ->get();
-        // Calculate subtotal using quantity * item price
-        $subtotal = $orderedItems->sum(fn($item) => $item->quantity * $item->item_price);
-        $serviceChargePercent = 6;
-        $serviceCharge = ($serviceChargePercent / 100) * $subtotal;
-        $discount = 0; // modify if you have discounts
-        $total = $subtotal + $serviceCharge - $discount;
-
-        return view('paymentPage', compact('orderedItems', 'subtotal', 'serviceCharge', 'discount', 'total', 'tableNum'));
+        return redirect()->route('order.index')->with('success', 'Order created successfully.');
     }
-
-
 }

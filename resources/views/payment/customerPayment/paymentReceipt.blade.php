@@ -14,6 +14,26 @@
     <p class="text-white text-2xl font-[Inter] font-bold">Receipt</p>
 </div>
 
+@php
+
+    $order = \App\Models\Order::with(['items.menu'])->find(session('order_id'));
+
+    // Time & Date Formatting
+    $formattedTime = $order ? $order->updated_at->format('H:i') : '';
+    $formattedDate = $order ? $order->updated_at->format('d M Y') : '';
+
+    // Order Items Total
+    $subtotal = 0;
+    if ($order) {
+        foreach ($order->items as $item) {
+            $subtotal += $item->quantity * $item->menu->price;
+        }
+    }
+
+    $serviceCharge = $subtotal * 0.10; // 10% service charge
+    $total = $subtotal + $serviceCharge;
+@endphp
+
     <!--Container for contents-->
 
 
@@ -37,19 +57,18 @@
                 <div class="overflow-y-auto" style="max-height: 40vh;">
                     <table class="w-full table-auto font-[Inter] font-semibold text-left text-sm">
                         <tbody class="space-y-2">
-                            <tr class="border-b ">
-                                <td class="py-2 px-2 text-gray-500">Order Number</td>
-                                <td class="py-2 px-2 text-right">#B0001</td>
-                            </tr>
-                            <tr class="border-b">
-                                <td class="py-2 px-2 text-gray-500">Time / Date</td>
-                                <td class="py-2 px-2 text-right">09:25 / 20 Apr 2025</td>
-                            </tr>
-                            <tr class="border-b">
-                                <td class="py-2 px-2 text-gray-500">Payment Method</td>
-                                <td class="py-2 px-2 text-right">{{ request()->get('payment_method') }}</td>
-                            </tr>
-
+                        <tr class="border-b">
+                            <td class="py-2 px-2 text-gray-500">Order Number</td>
+                            <td class="py-2 px-2 text-right">#{{ session('order_id') }}</td>
+                        </tr>
+                        <tr class="border-b">
+                            <td class="py-2 px-2 text-gray-500">Time / Date</td>
+                            <td class="py-2 px-2 text-right">{{ $formattedTime }} / {{ $formattedDate }}</td>
+                        </tr>
+                        <tr class="border-b">
+                            <td class="py-2 px-2 text-gray-500">Payment Method</td>
+                            <td class="py-2 px-2 text-right">{{ request()->get('payment_method') ?? 'N/A' }}</td>
+                        </tr>
                         </tbody>
                     </table>
                 </div>
@@ -59,23 +78,24 @@
                 <div class="overflow-y-auto" style="max-height: 40vh;">
                     <table class="w-full table-auto font-[Inter] font-semibold text-left text-sm">
                         <tbody class="space-y-2">
-                            <tr class="border-b ">
-                                <td class="py-2 px-2 text-gray-500">Amount</td>
-                                <td class="py-2 px-2 text-right">RM 10.90</td>
-                            </tr>
-                            <tr class="border-b">
-                                <td class="py-2 px-2 text-gray-500">Service Charge</td>
-                                <td class="py-2 px-2 text-right">RM 20.90</td>
-                            </tr>
-                            <tr class="border-b">
-                                <td class="py-2 px-2 text-gray-500">Total</td>
-                                <td class="py-2 px-2 text-right">RM 20.90</td>
-                            </tr>
-                            <tr class="border-b">
-                                <td class="py-2 px-2 text-gray-500">Status</td>
-                                <td class="py-2 px-2 text-right text-green-600">Success</td>
-                            </tr>
-
+                        <tr class="border-b">
+                            <td class="py-2 px-2 text-gray-500">Amount</td>
+                            <td class="py-2 px-2 text-right">RM {{ number_format($subtotal, 2) }}</td>
+                        </tr>
+                        <tr class="border-b">
+                            <td class="py-2 px-2 text-gray-500">Service Charge</td>
+                            <td class="py-2 px-2 text-right">RM {{ number_format($serviceCharge, 2) }}</td>
+                        </tr>
+                        <tr class="border-b">
+                            <td class="py-2 px-2 text-gray-500">Total</td>
+                            <td class="py-2 px-2 text-right">RM {{ number_format($total, 2) }}</td>
+                        </tr>
+                        <tr class="border-b">
+                            <td class="py-2 px-2 text-gray-500">Status</td>
+                            <td class="py-2 px-2 text-right text-green-600">
+                                {{ ucfirst($order->order_status ?? 'Unknown') }}
+                            </td>
+                        </tr>
                         </tbody>
                     </table>
                 </div>

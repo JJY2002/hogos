@@ -18,8 +18,14 @@
             <a href="#" class="text-white hover:text-gray-300 font-medium text-decoration-none bg-gray-600 px-3 py-2 rounded-2xl me-100">Table No: {{ session('table_no') }}</a>
             <a href="/" class="text-white hover:text-gray-300 font-medium text-decoration-none">Home</a>
             <a href="{{ route('menu.menu') }}" class="text-white hover:text-gray-300 font-medium text-decoration-none">Menu</a>
-            <a href="#" class="text-white hover:text-gray-300 font-medium text-decoration-none bg-gray-600 hover:bg-gray-800 px-3 py-2 rounded-2xl">Admin Login</a>
-            <a href="{{ route('order.cart') }}" class="text-white hover:text-gray-300 font-medium text-decoration-none"><i class="bi bi-basket2-fill"></i></a>
+            <a href="{{ route('order.cart') }}" class="relative text-black hover:text-gray-300 font-medium text-decoration-none py-2 px-4 rounded-2xl bg-white">
+                <i class="bi bi-basket2-fill text-xl"></i> Finish Order
+                @if($cartQuantity > 0)
+                    <span class="absolute -top-2 -left-2 bg-red-600 text-white text-xs font-bold rounded-full px-2 py-0.5">
+                        {{ $cartQuantity }}
+                    </span>
+                @endif
+            </a>
         </div>
     </div>
 
@@ -27,7 +33,6 @@
     <div id="mobile-menu" class="md:hidden hidden px-4 pb-4 space-y-2 bg-gray-900">
         <a href="/" class="block text-white hover:text-gray-300 font-medium text-decoration-none">Home</a>
         <a href="{{ route('menu.menu') }}" class="block text-white hover:text-gray-300 font-medium text-decoration-none">Menu</a>
-        <a href="#" class="block text-white hover:text-gray-300 font-medium text-decoration-none bg-gray-600 hover:bg-gray-800 px-3 py-2 rounded-2xl">Admin Login</a>
     </div>
 </nav>
 
