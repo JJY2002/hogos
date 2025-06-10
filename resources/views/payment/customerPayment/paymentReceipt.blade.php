@@ -38,8 +38,8 @@
                     <table class="w-full table-auto font-[Inter] font-semibold text-left text-sm">
                         <tbody class="space-y-2">
                             <tr class="border-b ">
-                                <td class="py-2 px-2 text-gray-500">Order Number</td>
-                                <td class="py-2 px-2 text-right">#B0001</td>
+                                <td class="py-2 px-2 text-gray-500">Table Number</td>
+                                <td class="py-2 px-2 text-right">#B001</td>
                             </tr>
                             <tr class="border-b">
                                 <td class="py-2 px-2 text-gray-500">Time / Date</td>
@@ -61,20 +61,21 @@
                         <tbody class="space-y-2">
                             <tr class="border-b ">
                                 <td class="py-2 px-2 text-gray-500">Amount</td>
-                                <td class="py-2 px-2 text-right">RM 10.90</td>
+                                <td class="py-2 px-2 text-right">RM 66.00</td>
                             </tr>
                             <tr class="border-b">
                                 <td class="py-2 px-2 text-gray-500">Service Charge</td>
-                                <td class="py-2 px-2 text-right">RM 20.90</td>
+                                <td class="py-2 px-2 text-right">RM 3.96</td>
                             </tr>
                             <tr class="border-b">
                                 <td class="py-2 px-2 text-gray-500">Total</td>
-                                <td class="py-2 px-2 text-right">RM 20.90</td>
+                                <td class="py-2 px-2 text-right">RM 69.96</td>
                             </tr>
                             <tr class="border-b">
                                 <td class="py-2 px-2 text-gray-500">Status</td>
                                 <td class="py-2 px-2 text-right text-green-600">Success</td>
                             </tr>
+                            
 
                         </tbody>
                     </table>
@@ -91,11 +92,13 @@
 
             <script>
                 function handleClick() {
-                    const paymentMethod = "{{ request()->get('payment_method') }}";
-                    window.location.href = "/payment/customerPayment/orderStatus?payment_method=" + encodeURIComponent(paymentMethod);
+                    //const paymentMethod = "{{ $paymentMethod }}";
+                    //const tableNum = "{{ $tableNum }}";
+                    window.location.href = `/payment/customerPayment/orderStatus?payment_method=${encodeURIComponent(paymentMethod)}&tableNum=${tableNum}`;
                     alert("Continue button clicked!");
                     // Or navigate to another page:
                 }
+                
             </script>
 
 

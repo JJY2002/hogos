@@ -18,7 +18,7 @@ class CreateOrderedItemsTable extends Migration
             //$table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             //$table->foreignId('order_id')->constrained('orders')->onDelete('cascade');
             $table->foreignId('order_item_id')->constrained('order_items')->onDelete('cascade');
-
+            $table->integer('tableNum');
             // Optional denormalized fields (if needed for historical accuracy or faster access)
             $table->integer('quantity');
             $table->decimal('price', 8, 2);

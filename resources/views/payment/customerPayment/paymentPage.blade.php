@@ -8,9 +8,11 @@
         }
 </style>
 
+
+
 <body style="background-color: #F0F0F0;" class="pb-10">
 
-<div class="bg-black w-full h-52 -mb-30 pl-20 pt-11 ">
+<div class="bg-black w-full h-52 -mb-40 -mt-3 pl-20 pt-2 ">
     <p class="text-white text-2xl font-[Inter] font-bold">Your Orders</p>
 </div>
 
@@ -24,7 +26,7 @@
                 <!--BOX 1 Content-->    
                 <div class="flex items-center justify-between">
                     <p class="text-2xl font-[Inter] font-semibold">Table No #{{ $tableNum }}</p>
-                    <p class="text-xl font-[Inter] font-semibold text-black">Dine In</p>
+                    <p class="text-xl font-[Inter] font-semibold text-black mr-3">Dine In</p>
                 </div>
                 <p style="color: #838383;" class="text-sm font-[Inter] font-semibold mb-3">Order #B000</p>
 
@@ -49,7 +51,7 @@
                         </tbody>
                     </table>
                 </div>-->
-                <div class="overflow-y-auto" style="max-height: 40vh;">
+                <div class="overflow-y-auto no-scrollbar" style="max-height: 40vh;">
                 <table class="w-full table-auto font-[Inter] font-semibold text-left text-sm">
                     <tbody class="space-y-2">
                         @foreach($orderedItems as $item)
@@ -57,8 +59,8 @@
                             <td class="py-2">
                                 <img src="{{ asset($item->image) }}" class="w-12 h-12 rounded" alt="product image">
                             </td>
-                            <td class="py-2">{{ $item->quantity }}x {{ $item->menu_name }}</td>
-                            <td class="py-2 text-right">RM {{ number_format($item->quantity * $item->item_price, 2) }}</td>
+                            <td class="py-2">{{ $item->quantity }} x {{ $item->menu_name }}</td>
+                            <td class="py-2 text-right pr-1">RM {{ number_format($item->quantity * $item->item_price, 2) }}</td>
                         </tr>
                         @endforeach
                     </tbody>
@@ -150,11 +152,18 @@
                             </div>
 
                             <input type="hidden" name="payment_method" id="selectedPaymentMethod">
+                            <input type="hidden" name="tableNum" value="{{ $tableNum }}">
+                            <input type="hidden" name="paymentMethod" id="paymentMethodInput" value="">
+                            <input type="hidden" name="subtotal" value="{{ $subtotal }}">
+                            <input type="hidden" name="serviceCharge" value="{{ $serviceCharge }}">
+                            <input type="hidden" name="total" value="{{ $total }}">
 
-                            <button type="submit"
-                                class="w-full bg-[#6078D4] hover:bg-[#5569B4] text-white font-bold py-3 rounded-lg">
-                                PAY NOW
-                            </button>
+                            <a href="{{ route('receipt.index', ['tableNum' => $tableNum, 'payment_method' => 'Online']) }}">
+                                <button type="submit"
+                                    class="w-full bg-[#6078D4] hover:bg-[#5569B4] text-white font-bold py-3 rounded-lg">
+                                    PAY NOW
+                                </button>
+                            </a>
                         
                 </div>
             </form>
@@ -174,8 +183,18 @@
                     input.value = option.dataset.method;
                     });
                 });
+
+                document.querySelectorAll('.payment-option').forEach(option => {
+                    option.addEventListener('click', function () {
+                        const method = this.getAttribute('data-method');
+                        document.getElementById('paymentMethodInput').value = method;
+                        document.getElementById('paymentForm').submit();
+                    });
+                });
             </script>
         </div>
+        
+
 
         
         
