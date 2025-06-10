@@ -1,10 +1,3 @@
-<<<<<<< HEAD
-
-<x-app-layout>
-       <div style="background-color: #f4f4f4; min-height: 100vh;">
-    <div class="container py-5">
-
-=======
 <x-app-layout>
     <div style="background-color: #f4f4f4; min-height: 100vh;">
         <div class="container py-5">
@@ -16,8 +9,6 @@
                 <h2 class="fw-bold">Manage Menu Items</h2>
                 <a href="{{ route('admin.menus.create') }}" class="btn btn-success">+ Add New Menu Item</a>
             </div>
->>>>>>> 9f16536e1212d4a4c6e6317a01b43939b1755507
-
             @if (session('success'))
                 <div class="alert alert-success">{{ session('success') }}</div>
             @endif
@@ -47,11 +38,4 @@
             </div>
         </div>
     </div>
-<<<<<<< HEAD
-
 </x-app-layout>
-
-
-=======
-</x-app-layout>
->>>>>>> 9f16536e1212d4a4c6e6317a01b43939b1755507

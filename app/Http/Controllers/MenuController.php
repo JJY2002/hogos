@@ -34,6 +34,7 @@ class MenuController extends Controller
         'name' => 'required',
         'description' => 'required',
         'price' => 'required|numeric',
+        'category' => 'required',
         'image' => 'required|image|mimes:jpeg,png,jpg|max:8120',
     ]);
 
@@ -43,12 +44,13 @@ class MenuController extends Controller
     } else {
         $image = null;
     }
-    
+
     // Create menu item in DB
     Menu::create([
         'name' => $request->name,
         'description' => $request->description,
         'price' => $request->price,
+        'category' => $request->category,
         'image' => 'storage/' . $imagePath, // Stored as storage/assets/images/filename.jpg
     ]);
 
