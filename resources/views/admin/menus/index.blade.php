@@ -1,8 +1,8 @@
-<<<<<<< HEAD
-<x-AppLayout>
+
+<x-app-layout>
        <div style="background-color: #f4f4f4; min-height: 100vh;">
     <div class="container py-5">
-=======
+
 
     <div class="container py-4">
         <h1 class="text-center mb-4">Manage Menu Items</h1>
@@ -49,7 +49,7 @@
             @endforeach
         </div>
     </div>
-<<<<<<< HEAD
-</x-AppLayout>
-=======
+
+</x-app-layout>
+
 

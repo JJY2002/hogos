@@ -1,9 +1,9 @@
-<<<<<<< HEAD
-<x-AppLayout>
+
+<x-app-layout>
        <div style="background-color: #f4f4f4; min-height: 100vh;">
     <div class="container py-5">
         <h2 class="mb-4 fw-bold">Edit Menu Item</h2>
-=======
+
 
     <div class="container">
         <h1 class="text-center mb-4">Edit Menu Item</h1>
@@ -42,7 +42,7 @@
             <button type="submit" class="btn btn-success">Update Item</button>
         </form>
     </div>
-<<<<<<< HEAD
-</x-AppLayout>
-=======
+
+</x-app-layout>
+
 

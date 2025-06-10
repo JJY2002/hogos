@@ -34,7 +34,7 @@ class MenuController extends Controller
         'name' => 'required',
         'description' => 'required',
         'price' => 'required|numeric',
-        'image' => 'required|image|mimes:jpeg,png,jpg|max:5120',
+        'image' => 'required|image|mimes:jpeg,png,jpg|max:8120',
     ]);
 
     if ($request->hasFile('image')) {

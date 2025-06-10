@@ -1,31 +1,22 @@
-<<<<<<< HEAD
-<x-AppLayout>
+<x-app-layout>
     <div style="background-color: #f4f4f4; min-height: 100vh;">
-        {{-- Header --}}
+        <!-- Header -->
         <div class="bg-dark text-white text-center py-4">
             <h2 class="fw-bold mb-0">MENU</h2>
         </div>
-=======
 
-    <div class="container mt-2">
-        <h1 class="text-center mb-4">Our Signatures</h1>
+        <!-- Menu Content -->
+        <div class="container mt-2">
+            <h1 class="text-center mb-4">Our Signatures</h1>
 
-
-        {{-- Category Buttons --}}
-        <div class="container my-4">
-            <div class="d-flex flex-wrap justify-content-center gap-2">
+            <!-- Category Buttons -->
+            <div class="d-flex flex-wrap justify-content-center gap-2 mb-4">
                 @foreach (['Pasta', 'Seafood', 'Lamb', 'Burgers', 'Fresh Juice', 'Coffee', 'Milk Shake'] as $category)
-                    <button class="btn btn-outline-dark rounded-pill px-4 py-2 fw-semibold">
-                        {{ $category }}
-                    </button>
+                    <button class="btn btn-outline-dark rounded-pill px-4 py-2 fw-semibold">{{ $category }}</button>
                 @endforeach
             </div>
 
-<<<<<<< HEAD
-            {{-- Section Title --}}
-            <h3 class="fw-bold text-dark mt-5 mb-4">ALL MENU</h3>
-
-            {{-- Menu Items --}}
+            <!-- Menu Items -->
             <div class="row">
                 @forelse ($menus as $menu)
                     <div class="col-md-4 mb-4">
@@ -35,19 +26,8 @@
                                 <h5 class="card-title fw-bold text-uppercase">{{ $menu->name }}</h5>
                                 <p class="card-text text-muted small">{{ $menu->description }}</p>
                                 <p class="fw-semibold">RM {{ number_format($menu->price, 2) }}</p>
+                                <button id="{{ $menu->id }}" class="btn btn-primary float-end add-item">Add to Order</button>
                             </div>
-=======
-        <div class="row">
-            @foreach($menus as $menu)
-                <div class="col-md-4">
-                    <div class="card mb-4">
-                        <img src="{{ asset($menu->image) }}" class="card-img-top" alt="{{ $menu->name }}">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ $menu->name }}</h5>
-                            <p class="card-text">{{ $menu->description }}</p>
-                            <p class="font-weight-bold">RM {{ number_format($menu->price, 2) }}</p>
-                            <button id="{{ $menu->id }}" class="btn btn-primary float-right add-item" {{--data-bs-toggle="modal" data-bs-target="#addToCartModal"--}}>Add to Order</button>
->>>>>>> bc921ed77f3358af29f06c7447b34f100b9558fb
                         </div>
                     </div>
                 @empty
@@ -55,32 +35,6 @@
                 @endforelse
             </div>
         </div>
-    </div>
-    <!-- Add to Cart Modal -->
-    <div class="modal fade" id="addToCartModal" tabindex="-1" aria-labelledby="addToCartLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-body text-center">
-                    <img src="" alt="" id="itemImg" class="img-fluid mb-3 rounded mx-auto block">
-                    <strong id="modalItemName" class="text-2xl"></strong>
-                    <div class="input-group mb-2 mt-3 px-40">
-                        <button class="btn btn-outline-secondary" type="button" id="minusBtn">-</button>
-                        <input id="orderAmt" type="number" class="form-control" placeholder="1" min="1" maxlength="2" value="1" readonly>
-                        <button class="btn btn-outline-secondary" type="button" id="addBtn">+</button>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <form id="addToCartForm" method="POST" data-url="{{ route('order.storeItem') }}">
-                        @csrf
-                        <input type="hidden" name="menu_id" id="modalMenuId">
-                        <input type="hidden" name="quantity" id="modalQuantity">
-                        <button type="submit" class="btn btn-primary">Add to Order</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <script type="module">
         $(".add-item").on("click", function () {
@@ -155,7 +109,7 @@
             });
         });
     </script>
-</x-AppLayout>
+</x-app-layout>
 
 
 

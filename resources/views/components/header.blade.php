@@ -22,10 +22,10 @@
                     <a class="nav-link" href="#">About</a>
                 </li>
                 <li class="nav-item">
-                <a class="nav-link" href="{{ route('menu.menu') }}">Menu</a>
+                <a class="nav-link" href="{{ route('admin.menus.index') }}">Menu</a>
                 </li>
 =======
->>>>>>> bc921ed77f3358af29f06c7447b34f100b9558fb
+<!-- >>>>>>> bc921ed77f3358af29f06c7447b34f100b9558fb -->
 
         <!-- Navigation Links -->
         <div id="navbar-menu" class="hidden md:flex md:items-center md:space-x-6">
