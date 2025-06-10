@@ -12,8 +12,6 @@
                 <path d="M4 6h16M4 12h16M4 18h16"/>
             </svg>
         </button>
-<<<<<<< HEAD
-<<<<<<< HEAD
         <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
@@ -25,11 +23,8 @@
                 <li class="nav-item">
                 <a class="nav-link" href="{{ route('admin.menus.index') }}">Menu</a>
                 </li>
-=======
-<!-- >>>>>>> bc921ed77f3358af29f06c7447b34f100b9558fb -->
-
-=======
->>>>>>> 9f16536e1212d4a4c6e6317a01b43939b1755507
+            </ul>
+        </div>
         <!-- Navigation Links -->
         <div id="navbar-menu" class="hidden md:flex md:items-center md:space-x-6">
             <a href="#" class="text-white hover:text-gray-300 font-medium text-decoration-none bg-gray-600 px-3 py-2 rounded-2xl me-100">Table No: {{ session('table_no') }}</a>
