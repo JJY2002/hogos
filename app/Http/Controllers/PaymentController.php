@@ -112,9 +112,7 @@ class PaymentController extends Controller
     }
 
 
-    public function receiptIndex() {
-    return view('payment.customerPayment.paymentReceipt'/*, compact('menus')*/);
-    }
+
 
 
     public function statusIndex() {
