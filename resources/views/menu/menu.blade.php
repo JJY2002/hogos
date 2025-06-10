@@ -1,4 +1,5 @@
 <x-app-layout>
+<<<<<<< HEAD
     <div style="background-color: #f4f4f4; min-height: 100vh;">
         <!-- Header -->
         <div class="bg-dark text-white text-center py-4">
@@ -28,12 +29,29 @@
                                 <p class="fw-semibold">RM {{ number_format($menu->price, 2) }}</p>
                                 <button id="{{ $menu->id }}" class="btn btn-primary float-end add-item">Add to Order</button>
                             </div>
+=======
+    <div class="container mt-2">
+        <h1 class="text-center mb-4">Our Signatures</h1>
+
+        @if($menus->isEmpty())
+            <p class="text-center text-muted">No menu items found.</p>
+        @endif
+
+        <div class="row">
+            @foreach($menus as $menu)
+                <div class="col-md-4">
+                    <div class="card mb-4">
+                        <img src="{{ asset($menu->image) }}" class="card-img-top" alt="{{ $menu->name }}">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ $menu->name }}</h5>
+                            <p class="card-text">{{ $menu->description }}</p>
+                            <p class="font-weight-bold">RM {{ number_format($menu->price, 2) }}</p>
+                            <button id="{{ $menu->id }}" class="btn btn-primary float-right add-item" {{--data-bs-toggle="modal" data-bs-target="#addToCartModal"--}}>Add to Order</button>
+>>>>>>> 9f16536e1212d4a4c6e6317a01b43939b1755507
                         </div>
                     </div>
-                @empty
-                    <p class="text-center text-muted">No menu items found.</p>
-                @endforelse
-            </div>
+                </div>
+            @endforeach
         </div>
 
     <script type="module">
@@ -110,7 +128,10 @@
         });
     </script>
 </x-app-layout>
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 9f16536e1212d4a4c6e6317a01b43939b1755507
 
 

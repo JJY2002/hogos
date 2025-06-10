@@ -11,6 +11,7 @@ Route::get('/', function () {
 });
 Route::get('/reset', function () {
     session()->forget('table_no');
+    session()->forget('admin');
     return redirect('/');
 })->name('reset');
 Route::get('/admin-login', function (\Illuminate\Http\Request $request) {
@@ -19,7 +20,8 @@ Route::get('/admin-login', function (\Illuminate\Http\Request $request) {
 
     if ($inputPassword === $correctPassword) {
         session(['admin' => true]);
-        return redirect('/order/manage');
+        session()->forget('table_no');
+        return redirect('/order');
     } else {
         return redirect()->back()->with('error', 'Incorrect admin password');
     }
@@ -54,20 +56,22 @@ Route::delete('/admin/menus/{menu}', [MenuController::class, 'destroy'])->name('
 Route::get('/admin/menus/create', [MenuController::class, 'create'])->name('admin.menus.create');
 
 
-
-
 // Customer menu view
 Route::get('/menu', [MenuController::class, 'customerMenu'])->name('menu.menu');
 
-
-
 //Order routes
-Route::get('/order/manage', function () { return view('order.manage');})->name('order.manage');
+Route::get('/order', [OrderController::class, 'index'])->name('order.index');
+Route::get('/orders/grid', [OrderController::class, 'orderGrid']);
+Route::get('/order/manage', [OrderController::class, 'manageOrder'])->name('order.manage');
 Route::post('order/storeItem', [OrderController::class, 'storeOrderItem'])->name('order.storeItem');
 Route::get('/order/cart', [OrderController::class, 'toCart'])->name('order.cart');
 Route::post('/order/update-quantity', [OrderController::class, 'changeQuantity'])->name('order.updateQuantity');
 Route::post('/order/update-order', [OrderController::class, 'updateOrder'])->name('order.updateOrder');
 Route::get('/order/get-item-quantity/{menuId}', [OrderController::class, 'getItemQuantity'])->name('order.getItemQuantity');
+Route::get('/order/edit/{id}', [OrderController::class, 'edit'])->name('order.edit');
+Route::post('/order/update/{id}', [OrderController::class, 'update'])->name('order.update');
+Route::get('/orders/create', [OrderController::class, 'create'])->name('order.create');
+Route::post('/orders/store', [OrderController::class, 'store'])->name('order.store');
 // >>>>>>> 95457fd76005c1cc2a7e914a73750e3c84d817f6
 
 
@@ -79,8 +83,6 @@ Route::get('/payment/customerPayment/orderStatus', [PaymentController::class, 's
 Route::get('/payment/adminPayment/adminPaymentList', [PaymentController::class, 'paymentListIndex']);
 
 Route::get('/payment/adminPayment/adminPaymentList', [PaymentController::class, 'adminPaymentListIndex'])->name('adminPaymentListIndex');
-Route::post('/order/store', [OrderController::class, 'storeOrder'])->name('order.store');
-Route::get('/orders/{id}', [OrderController::class, 'showOrder']);
 
 
 
