@@ -1,11 +1,6 @@
-<<<<<<< HEAD
-<x-AppLayout>
+<x-app-layout>
     <div class="container py-5">
         <h2 class="mb-4 fw-bold">Add New Menu Item</h2>
-=======
-    <div class="container mx-auto p-4">
-        <h1 class="text-2xl font-bold mb-4">Add New Menu Item</h1>
-
         @if ($errors->any())
     <div class="alert alert-danger">
         <ul>
@@ -21,11 +16,7 @@
         {{ session('success') }}
     </div>
 @endif
-        <form action="{{ route('admin.menus.store') }}" method="POST" enctype="multipart/form-data">
-        @csrf
-
-
-        <form action="{{ route('admin.menus.store') }}" method="POST" enctype="multipart/form-data" class="p-4 border rounded-4 shadow-sm bg-light">
+    <form action="{{ route('admin.menus.store') }}" method="POST" enctype="multipart/form-data" class="p-4 border rounded-4 shadow-sm bg-light">
             @csrf
 
             <div class="mb-3">
@@ -56,4 +47,6 @@
             <button type="submit" class="btn btn-primary">Add Item</button>
         </form>
     </div>
-</x-AppLayout>
+
+
+</x-app-layout>

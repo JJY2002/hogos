@@ -59,8 +59,6 @@ Route::get('/admin/menus/create', [MenuController::class, 'create'])->name('admi
 // Customer menu view
 Route::get('/menu', [MenuController::class, 'customerMenu'])->name('menu.menu');
 
-
-
 //Order routes
 Route::get('/order', [OrderController::class, 'index'])->name('order.index');
 Route::get('/orders/grid', [OrderController::class, 'orderGrid']);

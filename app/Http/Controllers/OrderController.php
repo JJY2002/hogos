@@ -217,7 +217,7 @@ class OrderController extends Controller
     {
         $request->validate([
             'table_no' => 'required|integer|min:1',
-            'order_status' => 'required|in:Pending,Completed,Canceled',
+            'order_status' => 'required|in:Pending,Confirmed,Canceled',
             'items_json' => 'required|json',
         ]);
 

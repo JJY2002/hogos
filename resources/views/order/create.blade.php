@@ -18,7 +18,7 @@
                 <label for="order_status">Order Status</label>
                 <select name="order_status" class="form-control" required>
                     <option value="Pending">Pending</option>
-                    <option value="Completed">Completed</option>
+                    <option value="Confirmed">Confirmed</option>
                     <option value="Canceled">Canceled</option>
                 </select>
             </div>

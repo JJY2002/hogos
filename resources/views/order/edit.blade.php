@@ -18,7 +18,7 @@
                 <label class="form-label">Order Status</label>
                 <select name="order_status" class="form-control">
                     <option value="Pending" {{ $order->order_status === 'Pending' ? 'selected' : '' }}>Pending</option>
-                    <option value="Completed" {{ $order->order_status === 'Completed' ? 'selected' : '' }}>Completed</option>
+                    <option value="Confirmed" {{ $order->order_status === 'Confirmed' ? 'selected' : '' }}>Confirmed</option>
                     <option value="Canceled" {{ $order->order_status === 'Canceled' ? 'selected' : '' }}>Canceled</option>
                 </select>
             </div>
