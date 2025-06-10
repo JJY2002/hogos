@@ -1,4 +1,4 @@
-<x-AppLayout>
+<x-app-layout>
 
 <style>
     p {
@@ -24,7 +24,7 @@
         <div class="flex justify-center">
             <p class="text-2xl font-[Inter] mb-3 font-bold">Your Order is Being Prepared</p>
         </div>
-        
+
         <div class=" justify-center">
             <p style="color: #838383;" class="text-base font-[Inter] font-semibold  text-center">
                 Please wait while we prepare your food.
@@ -40,7 +40,7 @@
             <tbody class="space-y-2">
                 <tr class="border-b">
                     <td class="py-2 px-2 text-gray-500">Order Number</td>
-                    <td class="py-2 px-2 text-right">#B0001</td>
+                    <td class="py-2 px-2 text-right">#{{ session('order_id') }}</td>
                 </tr>
                 <tr class="border-b">
                     <td class="py-2 px-2 text-gray-500">Estimated Time</td>
@@ -65,9 +65,9 @@
 
     <script>
         function handleClick() {
-            window.location.href = "/home"; // Adjust the link as needed
+            window.location.href = "{{ route('reset') }}"; // Adjust the link as needed
         }
     </script>
 
 </body>
-</x-AppLayout>
+</x-app-layout>

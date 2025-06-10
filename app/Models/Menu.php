@@ -2,11 +2,14 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
 
 class Menu extends Model
 {
-    protected $fillable = ['name', 'description', 'price', 'category'];
+    use HasFactory;
+
+    protected $fillable = ['name', 'description', 'price', 'category', 'image'];
 }

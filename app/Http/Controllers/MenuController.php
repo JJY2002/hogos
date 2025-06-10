@@ -11,10 +11,12 @@ class MenuController extends Controller
     /**
      * Display a listing of the resource.
      */
-     public function adminIndex() {
-        $menus = Menu::all();
-        return view('admin.menus.index', compact('menus'));
+    public function index()
+    {
+    $menus = Menu::all();
+    return view('admin.menus.index', compact('menus'));
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -26,15 +28,37 @@ class MenuController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request) {
-        $request->validate([
-            'name' => 'required',
-            'price' => 'required|numeric',
-            'category' => 'required',
-        ]);
-        Menu::create($request->all());
-        return redirect()->route('admin.menus')->with('success', 'Item added');
+  public function store(Request $request)
+{
+    $request->validate([
+        'name' => 'required',
+        'description' => 'required',
+        'price' => 'required|numeric',
+        'category' => 'required',
+        'image' => 'required|image|mimes:jpeg,png,jpg|max:8120',
+    ]);
+
+    if ($request->hasFile('image')) {
+        $imagePath = $request->file('image')->store('assets/images', 'public');
+        $image = 'storage/' . $imagePath;
+    } else {
+        $image = null;
     }
+
+    // Create menu item in DB
+    Menu::create([
+        'name' => $request->name,
+        'description' => $request->description,
+        'price' => $request->price,
+        'category' => $request->category,
+        'image' => 'storage/' . $imagePath, // Stored as storage/assets/images/filename.jpg
+    ]);
+
+    // Redirect back to admin page with success message
+    return redirect()->route('admin.menus.index')->with('success', 'Menu item added successfully!');
+}
+
+
 
     /**
      * Display the specified resource.
@@ -54,15 +78,33 @@ class MenuController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Menu $menu) {
-        $request->validate([
-            'name' => 'required',
-            'price' => 'required|numeric',
-            'category' => 'required',
-        ]);
-        $menu->update($request->all());
-        return redirect()->route('admin.menus')->with('success', 'Item updated');
+    public function update(Request $request, $id)
+    {
+    $menu = Menu::findOrFail($id);
+
+    $request->validate([
+        'name' => 'required',
+        'description' => 'required',
+        'price' => 'required|numeric',
+        'category' => 'required',
+        'image' => 'nullable|image|mimes:jpeg,png,jpg|max:5120',
+    ]);
+
+    $menu->name = $request->name;
+    $menu->description = $request->description;
+    $menu->price = $request->price;
+    $menu->category = $request->category;
+
+    if ($request->hasFile('image')) {
+        $imagePath = $request->file('image')->store('assets/images', 'public');
+        $menu->image = 'storage/' . $imagePath;
     }
+
+    $menu->save();
+
+    return redirect()->route('admin.menus.index')->with('success', 'Item updated successfully!');
+    }
+
 
     /**
      * Remove the specified resource from storage.
@@ -72,9 +114,12 @@ class MenuController extends Controller
         return back()->with('success', 'Item deleted');
     }
 
-     // Customer: View menu
-    public function customerView() {
-        $menus = Menu::all();
-        return view('customer.menu', compact('menus'));
-    }
+    // Customer: View menu
+    public function customerMenu()
+     {
+    $menus = Menu::all(); // Make sure items exist in your DB
+    return view('menu.menu', compact('menus'));
+     }
+
+
 }

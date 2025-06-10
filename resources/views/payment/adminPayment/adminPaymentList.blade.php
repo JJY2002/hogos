@@ -1,4 +1,4 @@
-<x-AppLayout>
+<x-app-layout>
 
 <style>
         p {
@@ -44,9 +44,9 @@
                                     <th></th>
                                 </tr>
                             <thead>
-                   
+
                             <tbody>
-                            
+
 
                             <tr class="border-t border-gray-300">
                                 <td class="py-2">#B0002</td>
@@ -127,7 +127,7 @@
             </script>
 
 
-            
+
 
 
 
@@ -140,4 +140,4 @@
 
 
 </body>
-</x-AppLayout>
+</x-app-layout>
