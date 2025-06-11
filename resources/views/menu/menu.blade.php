@@ -38,7 +38,31 @@
             </div>
         </div>
     </div>
-
+    <!-- Add to Cart Modal -->
+    <div class="modal fade" id="addToCartModal" tabindex="-1" aria-labelledby="addToCartLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body text-center">
+                    <img src="" alt="" id="itemImg" class="img-fluid mb-3 rounded mx-auto block">
+                    <strong id="modalItemName" class="text-2xl"></strong>
+                    <div class="input-group mb-2 mt-3 px-40">
+                        <button class="btn btn-outline-secondary" type="button" id="minusBtn">-</button>
+                        <input id="orderAmt" type="number" class="form-control" placeholder="1" min="1" maxlength="2" value="1" readonly>
+                        <button class="btn btn-outline-secondary" type="button" id="addBtn">+</button>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <form id="addToCartForm" method="POST" data-url="{{ route('order.storeItem') }}">
+                        @csrf
+                        <input type="hidden" name="menu_id" id="modalMenuId">
+                        <input type="hidden" name="quantity" id="modalQuantity">
+                        <button type="submit" class="btn btn-primary">Add to Order</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
     <script type="module">
         $(".add-item").on("click", function () {
             const menuId = $(this).attr("id");
