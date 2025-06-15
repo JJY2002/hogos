@@ -15,7 +15,7 @@
 <body style="background-color: #F0F0F0;" class="pb-1">
 
 <div class="w-full  -mt-2  pl-30 pt-1 mb-2">
-    <p class="text-black text-2xl font-[Inter] font-bold">Orders</p>
+    <p class="text-black text-2xl font-[Inter] font-bold pt-3">Payments</p>
 </div>
 
     <!--Container for contents-->
@@ -25,7 +25,7 @@
             <div style="min-width: 400px;">
 
                 <div class="flex items-center justify-between">
-                        <p class="text-xl font-[Inter] font-semibold">Order List</p>
+                        <p class="text-xl font-[Inter] font-semibold">Payment Order List</p>
                 </div>
 
                     <table class="w-full table-auto font-[Inter] min-w-[500px] font-medium text-left text-sm mt-2">
@@ -35,7 +35,6 @@
                                     <th>Table No</th>
                                     <th>Date</th>
                                     <th>Time</th>
-                                    <th>Customer</th>
                                     <th>Order Type</th>
                                     <th>Payment</th>
                                     <th>Quantity</th>
@@ -48,52 +47,15 @@
                             <tbody>
 
 
-                            <tr class="border-t border-gray-300">
-                                <td class="py-2">#B0002</td>
-                                <td class="py-2">20</td>
-                                <td class="py-2 ">2025-05-20</td>
-                                <td class="py-2 ">12:30</td>
-                                <td class="py-2 ">Adli Adli Ikmal</td>
-                                <td class="py-2 ">Dine In</td>
-                                <td class="py-2 ">Pending</td>
-                                <td class="py-2 ">5 item</td>
-                                <td class="py-2 ">Unfulfilled</td>
-                                <td class="py-2 ">RM12.30</td>
-                            </tr>
-                            <tr class="border-t border-gray-300">
-                                <td class="py-2">#B0002</td>
-                                <td class="py-2">20</td>
-                                <td class="py-2 ">2025-05-20</td>
-                                <td class="py-2 ">12:30</td>
-                                <td class="py-2 ">Adli</td>
-                                <td class="py-2 ">Dine In</td>
-                                <td class="py-2 ">Pending</td>
-                                <td class="py-2 ">5 item</td>
-                                <td class="py-2 ">Unfulfilled</td>
-                                <td class="py-2 ">RM12.30</td>
-                            </tr>
-                            <tr class="border-t border-gray-300">
-                                <td class="py-2">#B0002</td>
-                                <td class="py-2">20</td>
-                                <td class="py-2 ">2025-05-20</td>
-                                <td class="py-2 ">12:30</td>
-                                <td class="py-2 ">Adli</td>
-                                <td class="py-2 ">Dine In</td>
-                                <td class="py-2 ">Pending</td>
-                                <td class="py-2 ">5 item</td>
-                                <td class="py-2 ">Unfulfilled</td>
-                                <td class="py-2 ">RM12.30</td>
-                            </tr>
 
                             @foreach ($orders as $order)
                             <tr class="border-t border-gray-300">
                                 <td class="py-2">#{{ $order->id }}</td>
-                                <td class="py-2">{{ $order->table }}</td>
-                                <td class="py-2">{{ \Carbon\Carbon::parse($order->date)->format('Y-m-d') }}</td>
-                                <td class="py-2">{{ \Carbon\Carbon::parse($order->time)->format('H:i') }}</td>
-                                <td class="py-2">{{ $order->name }}</td>
-                                <td class="py-2">{{ $order->orderType }}</td>
-                                <td class="py-2">{{ $order->paymentStatus }}</td>
+                                <td class="py-2">{{ $order->table_no }}</td>
+                                <td class="py-2">{{ \Carbon\Carbon::parse($order->created_at)->format('Y-m-d') }}</td>
+                                <td class="py-2">{{ \Carbon\Carbon::parse($order->created_at)->format('H:i') }}</td>
+                                <td class="py-2">{{ $order->order_type }}</td>
+                                <td class="py-2">{{ $order->order_status }}</td>
                                 <td class="py-2">{{ $order->itemQuantity }} item{{ $order->quantity > 1 ? 's' : '' }}</td>
                                 <td class="py-2">{{ $order->orderStatus }}</td>
                                 <td class="py-2">RM{{ number_format($order->totalPrice, 2) }}</td>
@@ -119,8 +81,8 @@
 
             <script>
                 function handleClick() {
-                    const paymentMethod = "{{ request()->get('payment_method') }}";
-                    window.location.href = "/payment/customerPayment/orderStatus?payment_method=" + encodeURIComponent(paymentMethod);
+                    //const paymentMethod = "{{ request()->get('payment_method') }}";
+                    //window.location.href = "/payment/customerPayment/orderStatus?payment_method=" + encodeURIComponent(paymentMethod);
                     alert("Continue button clicked!");
                     // Or navigate to another page:
                 }
