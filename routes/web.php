@@ -88,7 +88,8 @@ Route::get('/payment/adminPayment/adminPaymentList', [PaymentController::class, 
 //Route::post('/order/store', [OrderController::class, 'storeOrder'])->name('order.store');
 Route::get('/orders/{id}', [OrderController::class, 'showOrder']);
 Route::get('/payment/paymentReceipt', [PaymentController::class, 'receiptIndex'])->name('receipt.index');
+Route::post('/payments', [PaymentController::class, 'store'])->name('payments.store');
 
 
-
-
+Route::get('/admin/payments', [PaymentController::class, 'showAllPayments'])->name('admin.payments');
+Route::post('/admin/payments/{id}/cancel', [PaymentController::class, 'cancelPayment'])->name('admin.payments.cancel');

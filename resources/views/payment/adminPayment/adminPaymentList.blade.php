@@ -7,6 +7,13 @@
             padding: 0;         /* Remove padding */
         }
 </style>
+
+@if (session('success'))
+    <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-2 rounded mb-3">
+        {{ session('success') }}
+    </div>
+@endif
+
 <head>
   <!-- Tailwind CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -45,33 +52,32 @@
                             <thead>
 
                             <tbody>
-
-
-
-                            @foreach ($orders as $order)
-                            <tr class="border-t border-gray-300">
-                                <td class="py-2">#{{ $order->id }}</td>
-                                <td class="py-2">{{ $order->table_no }}</td>
-                                <td class="py-2">{{ \Carbon\Carbon::parse($order->created_at)->format('Y-m-d') }}</td>
-                                <td class="py-2">{{ \Carbon\Carbon::parse($order->created_at)->format('H:i') }}</td>
-                                <td class="py-2">{{ $order->order_type }}</td>
-                                <td class="py-2">{{ $order->order_status }}</td>
-                                <td class="py-2">{{ $order->itemQuantity }} item{{ $order->quantity > 1 ? 's' : '' }}</td>
-                                <td class="py-2">{{ $order->orderStatus }}</td>
-                                <td class="py-2">RM{{ number_format($order->totalPrice, 2) }}</td>
-                                <td></td>
-                            </tr>
-                            @endforeach
-                        </tbody>
+                                @foreach ($payments as $payment)
+                                    <tr class="border-t border-gray-300">
+                                        <td class="py-2">#{{ $payment->id }}</td>
+                                        <td class="py-2">{{ $payment->table_number ?? '-' }}</td>
+                                        <td class="py-2">{{ \Carbon\Carbon::parse($payment->created_at)->format('Y-m-d') }}</td>
+                                        <td class="py-2">{{ \Carbon\Carbon::parse($payment->created_at)->format('H:i') }}</td>
+                                        <td class="py-2">{{ $payment->order_type ?? '-' }}</td>
+                                        <td class="py-2">{{ $payment->payment_method }}</td>
+                                        <td class="py-2">{{ $payment->total_quantity ?? '1' }} item{{ ($payment->total_quantity ?? 1) > 1 ? 's' : '' }}</td>
+                                        <td class="py-2 text-green-600">{{ $payment->payment_status ?? 'Success' }}</td>
+                                        <td class="py-2">RM{{ number_format($payment->total, 2) }}</td>
+                                        <td>
+                                            @if ($payment->payment_status !== 'Cancelled')
+                                                <form action="{{ route('admin.payments.cancel', $payment->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to cancel this payment?');">
+                                                    @csrf
+                                                    <button type="submit" class="text-red-600 font-bold hover:underline">Cancel</button>
+                                                </form>
+                                            @else
+                                                <span class="text-gray-400">Cancelled</span>
+                                            @endif
+                                        </td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
                     </table>
 
-                    <div class="justify-end">
-                        <div class="bg-[#6078D4] w-[450px] mx-auto py-[13px] p-[10px] rounded-2xl justify-items-center  text-white" role="button"
-                        tabindex="0"
-                        onclick="handleClick()">
-                            <p class="text-base font-[inter] justify-center font-bold">Continue</p>
-                        </div>
-                    </div>
                 </div>
 
 

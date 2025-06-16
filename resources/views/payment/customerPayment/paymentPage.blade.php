@@ -106,7 +106,8 @@
 
         <div class="flex-5 text-black">
 
-            <form action="/payment/customerPayment/paymentReceipt" method="GET" id="paymentForm">
+        <form action="{{ route('payments.store') }}" method="POST" id="paymentForm">
+        @csrf
 
                 <div class="bg-white p-[30px] font-[Inter] flex flex-col rounded-2xl text-black h-full">
 

@@ -111,6 +111,21 @@ class PaymentController extends Controller
         ));
     }
 
+    public function showAllPayments()
+    {
+        $payments = Payment::all(); // You can also use orderBy or paginate here
+        return view('payment.adminPayment.adminPaymentList', compact('payments'));
+    }
+
+    public function cancelPayment($id)
+{
+    $payment = Payment::findOrFail($id);
+    $payment->payment_status = 'Cancelled';
+    $payment->save();
+
+    return redirect()->back()->with('success', 'Payment cancelled successfully.');
+}
+
 
 
 
@@ -127,5 +142,31 @@ class PaymentController extends Controller
     {
         $orders = Order::all(); // Or ->paginate(10) if needed
         return view('payment.adminPayment.adminPaymentList', compact('orders'));
+    }
+
+    public function store(Request $request)
+    {
+        $validated = $request->validate([
+            'tableNum' => 'required|integer',
+            'payment_method' => 'required|string',
+            'subtotal' => 'required|numeric',
+            'serviceCharge' => 'required|numeric',
+            'total' => 'required|numeric',
+        ]);
+
+        $payment = Payment::create([
+            'table_number' => $request->tableNum,
+            'payment_method' => $request->payment_method,
+            'subtotal' => $request->subtotal,
+            'service_charge' => $request->serviceCharge,
+            'discount' => $request->discount ?? 0,
+            'total' => $request->total,
+            'voucher_code' => $request->voucher_code ?? null,
+        ]);
+
+        return redirect()->route('receipt.index', [
+            'tableNum' => $payment->table_number,
+            'payment_method' => $payment->payment_method
+        ]);
     }
 }

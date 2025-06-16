@@ -18,7 +18,7 @@
             <a href="{{ route('order.index') }}" class="text-white hover:text-gray-300 font-medium text-decoration-none">Home</a>
             <a href="{{ route('order.manage') }}" class="text-white hover:text-gray-300 font-medium text-decoration-none">Order</a>
             <a href="{{ route('admin.menus.index') }}" class="text-white hover:text-gray-300 font-medium text-decoration-none">Menu</a>
-            <a href="{{ route('adminPaymentListIndex') }}" class="text-white hover:text-gray-300 font-medium text-decoration-none">Payment</a>
+            <a href="{{ route('admin.payments') }}" class="text-white hover:text-gray-300 font-medium text-decoration-none">Payment</a>
             <a href="{{ route('reset') }}" class="text-white hover:text-gray-300 font-medium text-decoration-none bg-gray-600 hover:bg-gray-800 px-3 py-2 rounded-2xl">Logout</a>
         </div>
     </div>
